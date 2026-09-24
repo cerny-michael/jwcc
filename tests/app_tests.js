@@ -30,27 +30,19 @@ function flush(n, fn) {                 /* let the promise chain settle */
 flush(6, function () {
   /* --- the journal list loaded --- */
   ok(E('journal').children.length > 5, 'the select was populated with optgroups');
-  has(E('journal-count'), 'of 133 journals shown', 'journal tally reported');
+  has(E('journal-count'), '133 journals', 'journal tally reported');
 
-  /* --- filtering --- */
-  E('journal-filter').value = 'peace';
-  E('journal-filter').fire('input');
   var groups = E('journal').children.filter(function (c) { return c.tagName === 'OPTGROUP'; });
-  ok(groups.length >= 1, 'filtering leaves at least one field group');
-  var names = groups.map(function (g) { return g.children.map(function (o) { return o.textContent; }).join('|'); }).join('|');
-  ok(names.indexOf('Journal of Peace Research') >= 0, 'filter matches a journal by field');
-  ok(names.indexOf('American Political Science Review') < 0, 'filter excludes non-matches');
-
-  /* an acronym search */
-  E('journal-filter').value = 'apsr';
-  E('journal-filter').fire('input');
-  var names2 = E('journal').children.filter(function (c) { return c.tagName === 'OPTGROUP'; })
-    .map(function (g) { return g.children.map(function (o) { return o.textContent; }).join('|'); }).join('|');
-  ok(names2.indexOf('American Political Science Review') >= 0, 'acronym search finds APSR');
+  ok(groups.length >= 10, 'one group per subfield');
+  var names = groups.map(function (g) {
+    return g.children.map(function (o) { return o.textContent; }).join('|');
+  }).join('|');
+  ok(names.indexOf('Journal of Peace Research') >= 0, 'a journal from one subfield is listed');
+  ok(names.indexOf('American Political Science Review') >= 0, 'and one from another');
+  var optionCount = groups.reduce(function (n, g) { return n + g.children.length; }, 0);
+  eq(optionCount, 133, 'every journal is an option, none filtered away');
 
   /* --- pick a journal --- */
-  E('journal-filter').value = '';
-  E('journal-filter').fire('input');
   E('journal').value = 'American Journal of Political Science';
   E('journal').fire('change');
   eq(E('journal-card').hidden, false, 'journal card shown');

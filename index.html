@@ -25,11 +25,6 @@
     <h2 id="step1"><span class="step">1</span> Choose a target</h2>
 
     <div class="field">
-      <label for="journal-filter">Filter journals</label>
-      <input type="search" id="journal-filter" placeholder="e.g. comparative, APSR, peace" autocomplete="off">
-    </div>
-
-    <div class="field">
       <label for="journal">Journal</label>
       <select id="journal">
         <option value="">— No journal: I will set my own limit —</option>
@@ -84,12 +79,12 @@
     </div>
 
     <div class="card">
-      <h3>What is in the document</h3>
+      <h3>Inclusions / exclusions</h3>
       <p class="hint">Each row is counted separately. Change a <em>Counts?</em> value to test a reading of
         the instructions — the three figures update immediately.</p>
       <table class="breakdown">
         <thead>
-          <tr><th scope="col">Component</th><th scope="col" class="num">Words</th><th scope="col">Counts?</th><th scope="col">In</th></tr>
+          <tr><th scope="col">Component</th><th scope="col" class="num">Words</th><th scope="col">Counts?</th><th scope="col">Included in</th></tr>
         </thead>
         <tbody id="breakdown-body"></tbody>
       </table>

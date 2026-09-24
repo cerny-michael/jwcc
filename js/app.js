@@ -10,7 +10,6 @@
   var fileLabel = '';
 
   var el = {
-    filter: document.getElementById('journal-filter'),
     select: document.getElementById('journal'),
     count: document.getElementById('journal-count'),
     custom: document.getElementById('custom-limit'),
@@ -44,7 +43,7 @@
     .then(function (json) {
       data = json;
       data.journals.sort(function (a, b) { return a.name.localeCompare(b.name); });
-      fillSelect('');
+      fillSelect();
       el.sourceNote.textContent = 'Journal limits and counting criteria come from ' +
         data.meta.source + '. ' + data.meta.sourceNote;
       el.sourceCaveat.textContent = data.meta.caveat;
@@ -54,18 +53,9 @@
         '). You can still set your own word limit below.';
     });
 
-  function fillSelect(q) {
-    var needle = (q || '').trim().toLowerCase();
-    var keep = data.journals.filter(function (j) {
-      if (!needle) return true;
-      var hay = (j.name + ' ' + j.fields.join(' ')).toLowerCase();
-      if (hay.indexOf(needle) >= 0) return true;
-      var initials = j.name.split(/[\s:]+/).filter(function (w) { return /^[A-Z]/.test(w); })
-        .map(function (w) { return w[0]; }).join('').toLowerCase();
-      return initials.indexOf(needle) >= 0;
-    });
-
-    var prev = el.select.value;
+  /* Every journal, grouped by the first subfield the dataset lists for it. */
+  function fillSelect() {
+    var keep = data.journals;
     el.select.innerHTML = '';
     var none = document.createElement('option');
     none.value = '';
@@ -89,8 +79,8 @@
       el.select.appendChild(og);
     });
 
-    if (keep.some(function (j) { return j.name === prev; })) el.select.value = prev;
-    el.count.textContent = keep.length + ' of ' + data.journals.length + ' journals shown.';
+    el.count.textContent = keep.length + ' journals, grouped by subfield. ' +
+      'Type inside the list to jump to a title.';
   }
 
   function shortLimit(j) {
@@ -241,9 +231,9 @@
       var td4 = document.createElement('td');
       td4.className = 'flags';
       td4.innerHTML = [
-        r.inLower ? '<b>low</b>' : 'low',
+        r.inLower ? '<b>lower</b>' : 'lower',
         r.inBest ? '<b>best</b>' : 'best',
-        r.inUpper ? '<b>high</b>' : 'high'
+        r.inUpper ? '<b>upper</b>' : 'upper'
       ].join(' · ');
       tr.appendChild(td4);
 
@@ -345,8 +335,6 @@
   }
 
   /* ------------------------------------------------------------------ events */
-
-  el.filter.addEventListener('input', function () { fillSelect(this.value); });
 
   el.select.addEventListener('change', function () {
     var picked = this.value;
