@@ -71,6 +71,9 @@
     acks:      /^(acknowledge?ments?|funding|funding statement|conflicts? of interest|competing interests?|declarations?|disclosure statement|data availability|data and code availability|replication|author (bio|biograph|contribution)|about the authors?|ethics statement)\b/i,
     caption:   /^(table|figure|fig\.?|exhibit|map|chart|scheme|plate|appendix table|appendix figure)\s*[a-d]?\.?\s*\d*[a-z]?\s*[:.\u2014\u2013-]/i,
     notesHead: /^(notes?|endnotes?|footnotes?)\b[:.]?$/i,
+    /* A starred or daggered note on the first page: an author note, which is
+     * an acknowledgement rather than part of the abstract. */
+    starNote:  /^[*\u2217\u2020\u2021\u00A7]\s*\S/,
     /* An abstract whose label sits at the head of the same paragraph. */
     absInline: /^(abstract|summary)\s*[.:\u2014\u2013-]?\s+\S/i,
     /* Headings that open the article proper, used to close the front matter
@@ -134,6 +137,8 @@
         } else if (RX.absInline.test(t)) {
           section = 'abstract';
           target = 'abstract';
+        } else if (RX.starNote.test(t)) {
+          target = 'acks';
         } else if (RX.frontmisc.test(t)) {
           target = 'title';
         } else if (b.heading && RX.bodyHead.test(stripNumber(t))) {
@@ -145,7 +150,8 @@
           frontWords += words;
         }
       } else if (section === 'abstract') {
-        if (RX.keywords.test(t) || RX.frontmisc.test(t)) target = 'abstract';
+        if (RX.starNote.test(t)) target = 'acks';
+        else if (RX.keywords.test(t) || RX.frontmisc.test(t)) target = 'abstract';
         else if (b.heading || words > 400) section = 'body';
         else target = 'abstract';
       }

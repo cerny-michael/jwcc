@@ -64,6 +64,7 @@ var manuscript = [
   blk('We show that professional pressure reshapes the foreign policy advice elites give, ' +
       'using a survey of several hundred officials and a set of open-ended reports.'),
   blk('Keywords: elites, bureaucracy, pressure'),
+  blk('\u2217We thank seminar audiences for helpful comments on this draft.'),
   blk('Introduction', { heading: true }),
   blk('The first paragraph of the article proper runs to some length and says something.'),
   blk('Table 1: Coping strategies among officials'),
@@ -85,7 +86,7 @@ eq(seg.counts.captions, 6, 'the caption is recognised from its text alone');
 eq(seg.counts.tables, 8, 'the table contents');
 eq(seg.counts.refs, 1 + 11, 'the references heading and the entry');
 eq(seg.counts.appendix, 4 + 11, 'the appendix heading and its text');
-eq(seg.counts.acks, 1 + 5, 'the acknowledgements');
+eq(seg.counts.acks, 10 + 1 + 5, 'the author note and the acknowledgements section');
 eq(seg.counts.notes, 0, 'no notes in this stream');
 
 /* Section numbers are stripped; ordinary words beginning I/V/X are not. */
