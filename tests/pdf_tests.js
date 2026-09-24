@@ -2,6 +2,7 @@
  * PDF code path: line grouping, running-head removal, note detection by type
  * size, section segmentation. */
 var pass = 0, fail = 0;
+function ok(cond, what) { eq(!!cond, true, what); }
 function eq(got, want, what) {
   if (got === want) pass++;
   else { fail++; print('FAIL ' + what + ': got ' + JSON.stringify(got) + ' want ' + JSON.stringify(want)); }
@@ -13,9 +14,11 @@ function ten() {                      /* ten distinct words, as real prose is */
   for (var i = 0; i < 10; i++) w.push('w' + (++uid));
   return w.join(' ');
 }
+/* Each line is [text, fontSize, extraLeadingBefore]. */
 function page(no, lines) {
   var items = [], y = 700;
   lines.forEach(function (l) {
+    y -= (l[2] || 0);
     items.push({ str: l[0], transform: [l[1], 0, 0, l[1], 72, y], height: l[1] });
     y -= 16;
   });
@@ -109,6 +112,39 @@ eq(WordCount.classifyHeading('IV. References'), 'refs', 'roman-numbered heading'
 eq(WordCount.classifyHeading('7.2 Appendix B'), 'appendix', 'decimal-numbered heading');
 eq(WordCount.classifyHeading('Introduction'), null, 'Introduction keeps its I');
 eq(WordCount.classifyHeading('Variation in Elite Views'), null, 'a V-word heading survives');
+
+/* A typeset article with no abstract: front matter must stop at the first
+ * finished sentence rather than swallowing the opening paragraph. */
+var typeset = [page(1, [
+  ['COMMENTS AND REPLIES', HEAD],
+  ['Comment on a Theory of Yes Men', HEAD],
+  ['A. Scholar', BODY, 10],
+  ['Prendergast has discovered a new effect, and this comment argues that', BODY, 14],
+  ['the result does not hold in general.', BODY],
+  [ten(), BODY]
+])];
+var res5 = WordCount.pdfCountsFromPages(typeset, 1);
+eq(res5.counts.title, 3 + 7 + 2, 'heads and byline are front matter');
+eq(res5.counts.body, 18 + 10, 'the opening sentence starts the body');
+
+/* The gap rule must not chop an ordinary paragraph into pieces. */
+var flow = [page(1, [
+  ['Introduction', HEAD, 10],
+  ['one two three four five six seven eight nine ten', BODY, 12],
+  ['eleven twelve thirteen fourteen fifteen sixteen', BODY],
+  ['seventeen eighteen nineteen twenty.', BODY]
+])];
+var res6 = WordCount.pdfCountsFromPages(flow, 1);
+eq(res6.segments.length, 2, 'a heading and one merged paragraph');
+eq(res6.counts.body, 1 + 20, 'the paragraph was not split by the gap rule');
+
+/* Structural warnings must reach the PDF reader too, not only the .docx one. */
+var warned = res6.warnings.join(' ');
+ok(warned.indexOf('No abstract was detected') >= 0, 'a PDF with no abstract says so');
+ok(warned.indexOf('No reference list was detected') >= 0, 'a PDF with no reference list says so');
+ok(warned.indexOf('front matter can swallow') >= 0, 'the typeset front-matter caveat is stated');
+ok(res.warnings.join(' ').indexOf('No abstract was detected') < 0,
+   'and it stays quiet when the abstract was found');
 
 print('\n' + pass + ' passed, ' + fail + ' failed');
 if (fail) throw new Error(fail + ' test(s) failed');

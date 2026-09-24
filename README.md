@@ -50,15 +50,16 @@ Push to GitHub and turn on Pages (Settings → Pages → deploy from branch
 bash tests/run.sh
 ```
 
-135 assertions across four suites: the word counter and section segmentation,
+143 assertions across four suites: the word counter and section segmentation,
 the PDF code path against synthetic `pdf.js` output, the journal dataset and
 the bounds arithmetic, and the page wiring against a small shimmed DOM. They
 run under the JavaScriptCore interpreter that ships with macOS — no Node, no
 npm, no browser. Set `JSC` to another interpreter elsewhere.
 
-What the suite does *not* cover: the `.docx` and `.pdf` readers end to end,
-since those need `JSZip`, `pdf.js` and a real `DOMParser`. Check those by
-opening the page and dropping in a file whose count you already know.
+The suite stubs out `JSZip`, `pdf.js` and `DOMParser`, so it covers the
+segmentation and counting logic rather than the readers themselves. Both
+readers have been run against real files in Chrome; if you change one, check it
+the same way, with a document whose count you already know.
 
 ## How the count is defined
 

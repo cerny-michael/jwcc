@@ -143,7 +143,10 @@
           target = 'title';
         } else if (b.heading && RX.bodyHead.test(stripNumber(t))) {
           section = 'body';
-        } else if (words > 45 || frontWords > 120) {
+        } else if (words > 45 || frontWords > 120 ||
+                   (words > 15 && /[.!?]["'\u201D\u2019)]?(\s|$)/.test(t))) {
+          /* A title or affiliation is short and rarely contains a finished
+           * sentence; a block of prose that does is the article proper. */
           section = 'body';
         } else {
           target = 'title';
@@ -177,6 +180,26 @@
       segments.push({ component: target, words: words, preview: t.slice(0, 110) });
     }
     return { counts: counts, segments: segments };
+  }
+
+  /* Warnings about what the segmenter could not find. Applies to both readers:
+   * a component that was never detected has been counted as something else. */
+  function structureWarnings(counts, source) {
+    var w = [];
+    if (!counts.abstract) {
+      w.push('No abstract was detected \u2014 the engine looks for a line reading "Abstract". ' +
+        'If yours is unlabelled it has been counted as main text.');
+    }
+    if (!counts.refs) {
+      w.push('No reference list was detected (the engine looks for a heading reading "References", ' +
+        '"Bibliography" or "Works Cited"). Any references present have been counted as main text' +
+        (source === 'pdf' ? ', or as notes if they are set in smaller type.' : '.'));
+    }
+    if (!counts.title) {
+      w.push('No title block was detected. If the title and authors run on into the text without a ' +
+        'break, those words are inside the main-text figure.');
+    }
+    return w;
   }
 
   /* ------------------------------------------------------------ docx parsing */
@@ -318,15 +341,7 @@
         warnings.push('Display equations were counted separately (' + mathWords +
           ' words of maths). Mathematics typed as ordinary text cannot be told apart from prose.');
       }
-      if (!counts.title) {
-        warnings.push('No title block was detected. If the title and authors run on into the text without a break, those words are inside the main-text figure.');
-      }
-      if (!counts.abstract) {
-        warnings.push('No abstract was detected — the engine looks for a line reading "Abstract". If yours is unlabelled it has been counted as main text.');
-      }
-      if (!counts.refs) {
-        warnings.push('No reference list was detected (looked for a heading reading "References", "Bibliography" or "Works Cited"). Any references present have been counted as main text.');
-      }
+      structureWarnings(counts, 'docx').forEach(function (w) { warnings.push(w); });
       if (theZip.file('word/comments.xml')) {
         warnings.push('The file carries review comments. Comment text is never counted.');
       }
@@ -432,6 +447,19 @@
       return true;
     });
 
+    /* The prevailing leading, i.e. the usual distance between one line and the
+     * next. A gap noticeably wider than that is a paragraph break, which is
+     * what separates a byline from the opening paragraph. */
+    var gaps = {}, leading = 0, bestGap = -1;
+    for (i = 1; i < kept.length; i++) {
+      if (kept[i].page !== kept[i - 1].page) continue;
+      var g = Math.round((kept[i - 1].y - kept[i].y) * 2) / 2;
+      if (g > 0 && g < 60) gaps[g] = (gaps[g] || 0) + 1;
+    }
+    Object.keys(gaps).forEach(function (k) {
+      if (gaps[k] > bestGap) { bestGap = gaps[k]; leading = parseFloat(k); }
+    });
+
     /* Merge consecutive lines of the same type size into paragraph blocks, so
      * section and caption detection works on whole units. */
     var blocks = [], cur = null;
@@ -442,6 +470,9 @@
 
     for (i = 0; i < kept.length; i++) {
       var l = kept[i], t = l.text;
+      var prev = i ? kept[i - 1] : null;
+      var gapBreak = !!prev && prev.page === l.page && leading > 0 &&
+                     (prev.y - l.y) > leading * 1.45;
       var isSmall = bodySize > 0 && l.size > 0 && l.size < smallCut;
       var head = classifyHeading(t);
       var isCaption = RX.caption.test(t);
@@ -454,7 +485,7 @@
         if (isSmall) smallSeen = true;
         continue;
       }
-      if (!cur || cur.small !== isSmall) {
+      if (!cur || cur.small !== isSmall || gapBreak) {
         flush();
         cur = { text: t, kind: 'para', heading: false, small: isSmall };
       } else if (/[A-Za-z]-$/.test(cur.text) && /^[a-z]/.test(t)) {
@@ -486,10 +517,14 @@
     warnings.push('Text inside tables cannot be told apart from running prose in a PDF, so it is counted with the main text.');
     if (smallSeen) {
       warnings.push('Footnotes were identified by type size smaller than the body text (' + notesWords +
-        ' words). Endnotes set at body size are counted as main text unless a "Notes" heading precedes them.');
+        ' words). Endnotes set at body size are counted as main text unless a "Notes" heading precedes them, ' +
+        'and a bibliography set in smaller type than the body, as typeset journals often do, lands in this figure too.');
     } else {
       warnings.push('No smaller-than-body type was found, so no notes could be separated out. Any notes are inside the main-text figure.');
     }
+    structureWarnings(counts, 'pdf').forEach(function (w) { warnings.push(w); });
+    warnings.push('On a typeset PDF the front matter can swallow the first line or two of the article, ' +
+      'because a drop capital or a wide opening indent looks like another title line.');
     warnings.push('Ligatures, multi-column layouts and display equations can each shift a PDF count by a per cent or two.');
 
     return {
