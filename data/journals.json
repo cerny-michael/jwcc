@@ -1,0 +1,3625 @@
+{
+ "meta": {
+  "source": "Political_Science_Journal_Word_Limits.xlsx",
+  "sourceNote": "Research articles unless noted. Checked 24 September 2026. Duplicate titles consolidated; all supplied fields retained.",
+  "caveat": "“Not verified” means a policy could not be confirmed. “Not stated” means no limit was found in the accessible instructions; it does not mean unlimited length.",
+  "components": [
+   "title",
+   "abstract",
+   "body",
+   "notes",
+   "captions",
+   "tables",
+   "refs",
+   "appendix",
+   "acks",
+   "equations"
+  ],
+  "pageWords": 250
+ },
+ "journals": [
+  {
+   "name": "American Political Science Review",
+   "fields": [
+    "General political science"
+   ],
+   "limitKind": "none",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "No fixed cap",
+   "included": "Includes the main text, tables, figures, footnotes and other published text. Excludes references and supplementary material.",
+   "note": "Generally expects fewer than 11,000 words; this is an expectation, not a strict maximum.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/american-political-science-review/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 0,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "American Journal of Political Science",
+   "fields": [
+    "General political science",
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes body, notes, in-text citations, print appendices, and table/figure headers and notes. Excludes title page, abstract, reference list, online supplements and mathematical notation.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://ajps.org/guidelines-for-manuscripts/manuscript-preparation/",
+   "rules": {
+    "title": 0,
+    "abstract": 0,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 0,
+    "refs": 0,
+    "appendix": 1,
+    "acks": null,
+    "equations": 0
+   },
+   "conflicting": false
+  },
+  {
+   "name": "The Journal of Politics",
+   "fields": [
+    "General political science",
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "pages",
+   "limitWords": null,
+   "limitPages": 35,
+   "limitText": "35 pages",
+   "included": "Double-spaced manuscript, including notes and references; tables and figures form part of the manuscript. Title-page and abstract treatment not verified.",
+   "note": "Initial submission uses a page limit, not a word limit. Online appendix has a separate 25-page limit.",
+   "status": "Criteria incomplete",
+   "url": "https://www.journals.uchicago.edu/journals/jop/style?mobileUi=0",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "British Journal of Political Science",
+   "fields": [
+    "General political science",
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes all manuscript components except the appendix and bibliography.",
+   "note": "Normal range 4,000–10,000 words; exceptions may be considered.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/british-journal-of-political-science/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": 1,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 0,
+    "appendix": 0,
+    "acks": 1,
+    "equations": 1
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Perspectives on Politics",
+   "fields": [
+    "General political science",
+    "Political sociology, movements, and participation"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12000,
+   "limitPages": null,
+   "limitText": "12,000 words",
+   "included": "Includes body, notes and in-text citations. Excludes title page, abstract, bibliography, tables, figures, mathematical notation and online appendices/supplements.",
+   "note": "Full research articles.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/perspectives-on-politics/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": 0,
+    "abstract": 0,
+    "body": 1,
+    "notes": 1,
+    "captions": 0,
+    "tables": 0,
+    "refs": 0,
+    "appendix": 0,
+    "acks": null,
+    "equations": 0
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Research Quarterly",
+   "fields": [
+    "General political science"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not stated",
+   "included": "No article-length counting definition found in the accessible instructions.",
+   "note": "This does not establish that the journal has no limit.",
+   "status": "Not stated",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-political-research-quarterly_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Science Research and Methods",
+   "fields": [
+    "General political science",
+    "Political methodology and formal theory"
+   ],
+   "limitKind": "hard",
+   "limitWords": 9000,
+   "limitPages": null,
+   "limitText": "9,000 words",
+   "included": "Includes tables, figures, footnotes, references and printed appendices; excludes online appendices.",
+   "note": "Initial submissions are not strictly policed, but substantially overlength papers may be returned.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/political-science-research-and-methods/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 1,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "European Journal of Political Research",
+   "fields": [
+    "General political science"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes footnotes, tables and figures; excludes references, abstract and all appendices.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/european-journal-of-political-research/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": 0,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 0,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Studies",
+   "fields": [
+    "General political science"
+   ],
+   "limitKind": "hard",
+   "limitWords": 9000,
+   "limitPages": null,
+   "limitText": "9,000 words",
+   "included": "Includes notes; excludes references. Other components are not individually specified.",
+   "note": "Research articles.",
+   "status": "Criteria incomplete",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-political-studies_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": 0,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "European Political Science Review",
+   "fields": [
+    "General political science"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes footnotes, tables and figures; excludes references, abstract and all appendices. A full-page table/figure counts as 650 words; a half-page one as 325.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/european-political-science-review/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": 0,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 0,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Government and Opposition",
+   "fields": [
+    "General political science"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not stated",
+   "included": "No article-length counting definition found in the accessible instructions.",
+   "note": "This does not establish that the journal has no limit.",
+   "status": "Not stated",
+   "url": "https://www.cambridge.org/core/journals/government-and-opposition/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Political Science Review",
+   "fields": [
+    "General political science"
+   ],
+   "limitKind": "hard",
+   "limitWords": 8000,
+   "limitPages": null,
+   "limitText": "8,000 words",
+   "included": "Includes references, notes, tables and figures.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-international-political-science-review-revue-internationale-de-science-politique_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Canadian Journal of Political Science",
+   "fields": [
+    "General political science"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes notes, tables and figures; excludes references and online supplementary material.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/canadian-journal-of-political-science-revue-canadienne-de-science-politique/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 0,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Australian Journal of Political Science",
+   "fields": [
+    "General political science"
+   ],
+   "limitKind": "hard",
+   "limitWords": 8000,
+   "limitPages": null,
+   "limitText": "8,000 words",
+   "included": "Includes references; excludes online appendices. Further components not individually specified.",
+   "note": "Older publisher style sheet; current applicability not verified.",
+   "status": "Older guidance",
+   "url": "https://files.taylorandfrancis.com/style_cajp.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Comparative Political Studies",
+   "fields": [
+    "Comparative politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current instructions were inaccessible. A publisher PDF returned for this title contained another journal's instructions and was not used.",
+   "status": "Not verified",
+   "url": "https://journals.sagepub.com/author-instructions/CPS",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Comparative Politics",
+   "fields": [
+    "Comparative politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12000,
+   "limitPages": null,
+   "limitText": "12,000 words",
+   "included": "Includes citations; excludes abstract, figures, tables and appendix.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://jcp.gc.cuny.edu/submission/",
+   "rules": {
+    "title": null,
+    "abstract": 0,
+    "body": 1,
+    "notes": null,
+    "captions": 0,
+    "tables": 0,
+    "refs": null,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "World Politics",
+   "fields": [
+    "Comparative politics",
+    "International and comparative political economy"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12500,
+   "limitPages": null,
+   "limitText": "12,500 words",
+   "included": "Includes notes and references; excludes tables, figures and appendices.",
+   "note": "Online supplementary material has a separate 15-page limit.",
+   "status": "Verified",
+   "url": "https://wpj.princeton.edu/document/111",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 0,
+    "tables": 0,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Democratization",
+   "fields": [
+    "Comparative politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=fdem20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Studies in Comparative International Development",
+   "fields": [
+    "Comparative politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not stated",
+   "included": "No article-length counting definition found in the accessible instructions.",
+   "note": "This does not establish that the journal has no limit.",
+   "status": "Not stated",
+   "url": "https://link.springer.com/journal/12116/submission-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "West European Politics",
+   "fields": [
+    "Comparative politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=fwep20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Party Politics",
+   "fields": [
+    "Comparative politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 8000,
+   "limitPages": null,
+   "limitText": "8,000 words",
+   "included": "All inclusive: title, abstract, notes, references, tables, author biography and other manuscript elements.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-party-politics_-sage-journals.pdf",
+   "rules": {
+    "title": 1,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 1,
+    "acks": 1,
+    "equations": 1
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Electoral Studies",
+   "fields": [
+    "Comparative politics",
+    "Political behavior, public opinion, and political psychology"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.sciencedirect.com/journal/electoral-studies/publish/guide-for-authors",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Elections, Public Opinion and Parties",
+   "fields": [
+    "Comparative politics",
+    "Political behavior, public opinion, and political psychology"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=fbep20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Organization",
+   "fields": [
+    "International relations",
+    "International and comparative political economy"
+   ],
+   "limitKind": "hard",
+   "limitWords": 14000,
+   "limitPages": null,
+   "limitText": "14,000 words",
+   "included": "Includes tables, figures and notes; excludes bibliography and online supplementary material.",
+   "note": "Full research articles.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/international-organization/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 0,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Studies Quarterly",
+   "fields": [
+    "International relations"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12000,
+   "limitPages": null,
+   "limitText": "12,000 words",
+   "included": "Includes tables, figures, footnotes and bibliography; excludes abstract and appendices.",
+   "note": "Initial appendices have a separate 10-page limit.",
+   "status": "Verified",
+   "url": "https://academic.oup.com/isq/pages/General_Instructions",
+   "rules": {
+    "title": null,
+    "abstract": 0,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "European Journal of International Relations",
+   "fields": [
+    "International relations"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12000,
+   "limitPages": null,
+   "limitText": "12,000 words",
+   "included": "Includes all notes and references. Other components are not separately enumerated.",
+   "note": "Usual length 8,000–10,000; 12,000 is the maximum.",
+   "status": "Criteria incomplete",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-european-journal-of-international-relations_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Theory",
+   "fields": [
+    "International relations"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12000,
+   "limitPages": null,
+   "limitText": "12,000 words",
+   "included": "Excludes references; other component rules not explicitly specified.",
+   "note": "Research articles.",
+   "status": "Criteria incomplete",
+   "url": "https://www.cambridge.org/core/journals/international-theory/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": 0,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Review of International Studies",
+   "fields": [
+    "International relations"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12000,
+   "limitPages": null,
+   "limitText": "12,000 words",
+   "included": "Includes notes and references; excludes abstract and title.",
+   "note": "Research articles: 8,500–12,000 words.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/review-of-international-studies/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": 0,
+    "abstract": 0,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Studies Review",
+   "fields": [
+    "International relations"
+   ],
+   "limitKind": "hard",
+   "limitWords": 15000,
+   "limitPages": null,
+   "limitText": "15,000 words",
+   "included": "Includes references; other component rules not explicitly specified.",
+   "note": "Analytical essays; other contribution types have different limits.",
+   "status": "Criteria incomplete",
+   "url": "https://academic.oup.com/isr/pages/General_Instructions",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Relations",
+   "fields": [
+    "International relations"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes endnotes, abstract, keywords and what the guidelines call 'author bibliographies'.",
+   "note": "Normal range 8,000–10,000. The unusual wording 'author bibliographies' is retained rather than interpreted.",
+   "status": "Ambiguous wording",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-international-relations_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": true
+  },
+  {
+   "name": "Foreign Policy Analysis",
+   "fields": [
+    "International relations"
+   ],
+   "limitKind": "hard",
+   "limitWords": 11000,
+   "limitPages": null,
+   "limitText": "11,000 words",
+   "included": "Includes references, tables and figures; excludes online supplementary material.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://academic.oup.com/fpa/pages/general_instructions",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Political Sociology",
+   "fields": [
+    "International relations",
+    "Political sociology, movements, and participation"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "A detailed definition of included/excluded components was not stated on the accessible page.",
+   "note": "Research articles normally 8,000–10,000 words.",
+   "status": "Criteria incomplete",
+   "url": "https://academic.oup.com/ips/pages/general_instructions",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Global Studies Quarterly",
+   "fields": [
+    "International relations"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "The current official page could not be reliably retrieved; mismatched search text was not used.",
+   "status": "Not verified",
+   "url": "https://academic.oup.com/isagsq/pages/General_Instructions",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Security",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "none",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "No fixed cap",
+   "included": "Includes footnotes; other components not individually specified.",
+   "note": "8,000–15,000 words is considered appropriate; consult editors before submitting more than 18,000.",
+   "status": "Criteria incomplete",
+   "url": "https://www.belfercenter.org/international-security/submission-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Security Studies",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "hard",
+   "limitWords": 15000,
+   "limitPages": null,
+   "limitText": "15,000 words",
+   "included": "Includes text, all tables and figures, notes and printed appendices.",
+   "note": "Preferred length 10,000–12,000 words.",
+   "status": "Verified",
+   "url": "https://files.taylorandfrancis.com/fsst-author-guidelines.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": null,
+    "appendix": 1,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Conflict Resolution",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "hard",
+   "limitWords": 11000,
+   "limitPages": null,
+   "limitText": "11,000 words",
+   "included": "All inclusive.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-journal-of-conflict-resolution_-sage-journals.pdf",
+   "rules": {
+    "title": 1,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 1,
+    "acks": 1,
+    "equations": 1
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Peace Research",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "hard",
+   "limitWords": 11000,
+   "limitPages": null,
+   "limitText": "11,000 words",
+   "included": "Includes abstract, keywords, notes, figure/table content, in-text citations and reference list.",
+   "note": "Initial submissions may exceed the limit by 10% (12,100 words); the final article must meet 11,000.",
+   "status": "Verified",
+   "url": "https://academic.oup.com/jpr/pages/author-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Global Security Studies",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12000,
+   "limitPages": null,
+   "limitText": "12,000 words",
+   "included": "Includes footnotes/endnotes, bibliography and tables; excludes online-only supplementary material.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://academic.oup.com/jogss/pages/Research_Articles",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Conflict Management and Peace Science",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "The official PDF was found, but its length-policy text could not be retrieved reliably.",
+   "status": "Not verified",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-conflict-management-and-peace-science_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Security Dialogue",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes abstract, notes and references.",
+   "note": "Normal range 8,000–10,000 words.",
+   "status": "Verified",
+   "url": "https://academic.oup.com/sd/pages/author-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Strategic Studies",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=fjss20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Contemporary Security Policy",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://contemporarysecuritypolicy.org/for-authors/",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Peacekeeping",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=fint20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Armed Forces & Society",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "hard",
+   "limitWords": 9000,
+   "limitPages": null,
+   "limitText": "9,000 words",
+   "included": "Conflicting definitions: one passage excludes references; the preparation section excludes tables, figures, references and endnotes.",
+   "note": "Confirm the intended exclusions with the journal before relying on the cap.",
+   "status": "Conflicting instructions",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-armed-forces-society_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": true
+  },
+  {
+   "name": "Terrorism and Political Violence",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=utpv20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Studies in Conflict & Terrorism",
+   "fields": [
+    "Security, conflict, and peace"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=uter20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Review of International Political Economy",
+   "fields": [
+    "International and comparative political economy"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=rrip20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "New Political Economy",
+   "fields": [
+    "International and comparative political economy"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=cnpe20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "The Review of International Organizations",
+   "fields": [
+    "International and comparative political economy",
+    "Human rights and global governance"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not stated",
+   "included": "No article-length counting definition found in the accessible instructions.",
+   "note": "This does not establish that the journal has no limit.",
+   "status": "Not stated",
+   "url": "https://link.springer.com/journal/11558/submission-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Business and Politics",
+   "fields": [
+    "International and comparative political economy"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not stated",
+   "included": "No article-length counting definition found in the accessible instructions.",
+   "note": "This does not establish that the journal has no limit.",
+   "status": "Not stated",
+   "url": "https://www.cambridge.org/core/journals/business-and-politics/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Politics & Society",
+   "fields": [
+    "International and comparative political economy",
+    "Political sociology, movements, and participation"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12000,
+   "limitPages": null,
+   "limitText": "12,000 words",
+   "included": "Excludes notes, reference lists and appendices.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-politics-society_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 0,
+    "captions": null,
+    "tables": null,
+    "refs": 0,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Socio-Economic Review",
+   "fields": [
+    "International and comparative political economy"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes references; excludes abstract, tables, figures and appendices (including online appendices).",
+   "note": "Normal maximum; exceptions may be considered.",
+   "status": "Verified",
+   "url": "https://academic.oup.com/ser/pages/Guidelines_For_Authors",
+   "rules": {
+    "title": null,
+    "abstract": 0,
+    "body": 1,
+    "notes": null,
+    "captions": 0,
+    "tables": 0,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Regulation & Governance",
+   "fields": [
+    "International and comparative political economy"
+   ],
+   "limitKind": "hard",
+   "limitWords": 11000,
+   "limitPages": null,
+   "limitText": "11,000 words",
+   "included": "Includes abstract, references, endnotes, tables and appendices; the preferred-length passage also includes figures.",
+   "note": "8,000–10,000 preferred on initial submission; 11,000 maximum.",
+   "status": "Verified",
+   "url": "https://onlinelibrary.wiley.com/page/journal/17485991/homepage/forauthors.html",
+   "rules": {
+    "title": null,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 1,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "American Politics Research",
+   "fields": [
+    "American politics and political institutions"
+   ],
+   "limitKind": "pages",
+   "limitWords": null,
+   "limitPages": 25,
+   "limitText": "About 25 pages",
+   "included": "Double-spaced text; notes, references, tables and figures go on separate pages. Their inclusion in the 25-page guidance is unclear.",
+   "note": "An approximate length guideline, not a verified hard word cap.",
+   "status": "Criteria incomplete",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-american-politics-research_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Legislative Studies Quarterly",
+   "fields": [
+    "American politics and political institutions"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "No detailed included/excluded component definition found.",
+   "note": "Research articles.",
+   "status": "Criteria incomplete",
+   "url": "https://onlinelibrary.wiley.com/page/journal/19399162/homepage/forauthors.html",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Congress & the Presidency",
+   "fields": [
+    "American politics and political institutions"
+   ],
+   "limitKind": "pages",
+   "limitWords": null,
+   "limitPages": 40,
+   "limitText": "40 pages",
+   "included": "Includes abstract, tables, references, figure/table captions and endnotes; double-spaced, with 250 words per page specified.",
+   "note": "Page-based rule. No separate hard word-count cap is stated.",
+   "status": "Verified",
+   "url": "https://www.american.edu/spa/ccps/journal.cfm",
+   "rules": {
+    "title": null,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Presidential Studies Quarterly",
+   "fields": [
+    "American politics and political institutions"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes tables, figures and references.",
+   "note": "Normal range 8,000–10,000; exceptions may be considered.",
+   "status": "Verified",
+   "url": "https://onlinelibrary.wiley.com/page/journal/17415705/homepage/forauthors.html",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "State Politics & Policy Quarterly",
+   "fields": [
+    "American politics and political institutions"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes text, figures/tables, citations, footnotes and references.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/state-politics-and-policy-quarterly/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Studies in American Political Development",
+   "fields": [
+    "American politics and political institutions"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not stated",
+   "included": "No article-length counting definition found in the accessible instructions.",
+   "note": "This does not establish that the journal has no limit.",
+   "status": "Not stated",
+   "url": "https://www.cambridge.org/core/journals/studies-in-american-political-development/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "The Forum",
+   "fields": [
+    "American politics and political institutions"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.degruyterbrill.com/journal/key/for/html",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Behavior",
+   "fields": [
+    "Political behavior, public opinion, and political psychology"
+   ],
+   "limitKind": "hard",
+   "limitWords": 9000,
+   "limitPages": null,
+   "limitText": "9,000 words",
+   "included": "Includes body, notes, and table/figure titles and captions. Excludes title page, abstract, references, contents inside tables/figures and online supplementary material.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://link.springer.com/journal/11109/submission-guidelines",
+   "rules": {
+    "title": 0,
+    "abstract": 0,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 0,
+    "refs": 0,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Public Opinion Quarterly",
+   "fields": [
+    "Political behavior, public opinion, and political psychology"
+   ],
+   "limitKind": "hard",
+   "limitWords": 6500,
+   "limitPages": null,
+   "limitText": "6,500 words",
+   "included": "Includes text and notes; excludes figures, tables, references and appendices.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://academic.oup.com/poq/pages/Notice_To_Contributors",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 0,
+    "tables": 0,
+    "refs": 0,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Psychology",
+   "fields": [
+    "Political behavior, public opinion, and political psychology"
+   ],
+   "limitKind": "soft",
+   "limitWords": 9000,
+   "limitPages": null,
+   "limitText": "7,000 / 9,000",
+   "included": "Main text only; excludes tables, figures, references, title and abstract.",
+   "note": "Recommended lengths: 7,000 for quantitative/theoretical/methodological papers; 9,000 for qualitative/mixed-methods papers. Not a universal hard cap.",
+   "status": "Verified",
+   "url": "https://ispp.org/wp/wp-content/uploads/2020/03/POPS-Author-Guidelines_June2025.pdf",
+   "rules": {
+    "title": 0,
+    "abstract": 0,
+    "body": 1,
+    "notes": null,
+    "captions": 0,
+    "tables": 0,
+    "refs": 0,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Communication",
+   "fields": [
+    "Political behavior, public opinion, and political psychology"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=upcp20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Research Exchange",
+   "fields": [
+    "Political behavior, public opinion, and political psychology"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://ecpr.eu/content-page/559",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Theory",
+   "fields": [
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes text and notes; excludes abstract.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-political-theory_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": 0,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "The Review of Politics",
+   "fields": [
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "hard",
+   "limitWords": 11000,
+   "limitPages": null,
+   "limitText": "11,000 words",
+   "included": "Includes abstract and footnotes.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://reviewofpolitics.nd.edu/submit-a-manuscript/",
+   "rules": {
+    "title": null,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Political Ideologies",
+   "fields": [
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=cjpi20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Contemporary Political Theory",
+   "fields": [
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "All inclusive, including notes and references.",
+   "note": "Fewer than 8,500 words encouraged; 10,000 is the maximum.",
+   "status": "Verified",
+   "url": "https://link.springer.com/journal/41296/submission-guidelines",
+   "rules": {
+    "title": 1,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 1,
+    "acks": 1,
+    "equations": 1
+   },
+   "conflicting": false
+  },
+  {
+   "name": "European Journal of Political Theory",
+   "fields": [
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "hard",
+   "limitWords": 11000,
+   "limitPages": null,
+   "limitText": "11,000 words",
+   "included": "Includes endnotes and bibliography.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-european-journal-of-political-theory_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "History of Political Thought",
+   "fields": [
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "none",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "No word limit",
+   "included": "Not applicable: the journal explicitly states that it has no word limit.",
+   "note": "Do not confuse this explicit policy with a limit that is simply absent from a webpage.",
+   "status": "Verified",
+   "url": "https://www.imprint.co.uk/product/hpt/",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Philosophy & Public Affairs",
+   "fields": [
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://onlinelibrary.wiley.com/page/journal/10884963/homepage/forauthors.html",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Ethics",
+   "fields": [
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "soft",
+   "limitWords": 15000,
+   "limitPages": null,
+   "limitText": "Fewer than 15,000",
+   "included": "Includes notes and references.",
+   "note": "Preferred range 5,000–12,000; submissions should be below 15,000.",
+   "status": "Verified",
+   "url": "https://www.journals.uchicago.edu/journals/et/ms-prep",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Political Philosophy",
+   "fields": [
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes all text, footnotes, references and other manuscript elements.",
+   "note": "Longer papers only exceptionally. Legacy author instructions: current submission availability was not verified.",
+   "status": "Submission status unclear",
+   "url": "https://onlinelibrary.wiley.com/page/journal/14679760/homepage/forauthors.html",
+   "rules": {
+    "title": 1,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 1,
+    "acks": 1,
+    "equations": 1
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Philosophy",
+   "fields": [
+    "Political theory and political philosophy"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://politicalphilosophyjournal.org/site/author-guidelines/",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Analysis",
+   "fields": [
+    "Political methodology and formal theory"
+   ],
+   "limitKind": "hard",
+   "limitWords": 6000,
+   "limitPages": null,
+   "limitText": "6,000 words",
+   "included": "Includes abstract, body, figure legends and footnotes; excludes title, words inside tables, references and web appendix.",
+   "note": "Research-article limit introduced January 2025.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/political-analysis/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": 0,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 0,
+    "refs": 0,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Experimental Political Science",
+   "fields": [
+    "Political methodology and formal theory"
+   ],
+   "limitKind": "hard",
+   "limitWords": 4000,
+   "limitPages": null,
+   "limitText": "4,000 words",
+   "included": "Detailed included/excluded components are not explicitly stated on the accessible instructions page.",
+   "note": "Research articles; online appendices are permitted.",
+   "status": "Criteria incomplete",
+   "url": "https://www.cambridge.org/core/journals/journal-of-experimental-political-science/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Research & Politics",
+   "fields": [
+    "Political methodology and formal theory"
+   ],
+   "limitKind": "hard",
+   "limitWords": 4000,
+   "limitPages": null,
+   "limitText": "4,000 words",
+   "included": "Includes notes and references; excludes figures, tables, images and supporting material in online appendices.",
+   "note": "Normal maximum for research articles; no more than 12 notes.",
+   "status": "Verified",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-research-and-politics_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 0,
+    "tables": 0,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Science Research Exchange",
+   "fields": [
+    "Political methodology and formal theory"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Title not verified",
+   "included": "Not applicable until the intended journal is identified.",
+   "note": "No journal verified under this exact name. It appears to conflate Political Research Exchange with Political Science Research and Methods; both have separate rows.",
+   "status": "Title correction needed",
+   "url": "https://ecpr.eu/content-page/559",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Theoretical Politics",
+   "fields": [
+    "Political methodology and formal theory"
+   ],
+   "limitKind": "none",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "No absolute cap",
+   "included": "Includes notes and references.",
+   "note": "Target length 7,000 words, not an absolute maximum.",
+   "status": "Verified",
+   "url": "https://www.sagepub.com/docs/default-source/msg/submission-guidelines_-journal-of-theoretical-politics_-sage-journals.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Social Choice and Welfare",
+   "fields": [
+    "Political methodology and formal theory"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not stated",
+   "included": "No article-length counting definition found in the accessible instructions.",
+   "note": "This does not establish that the journal has no limit.",
+   "status": "Not stated",
+   "url": "https://link.springer.com/journal/355/submission-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Public Choice",
+   "fields": [
+    "Political methodology and formal theory"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes footnotes, references, tables and figures; excludes appendices.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://link.springer.com/journal/11127/submission-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Public Administration Research and Theory",
+   "fields": [
+    "Public policy, administration, and governance"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12000,
+   "limitPages": null,
+   "limitText": "12,000 words",
+   "included": "Includes abstract, tables and references; excludes online appendices.",
+   "note": "Explain any request for an exception in the cover letter.",
+   "status": "Verified",
+   "url": "https://academic.oup.com/jpart/pages/Instructions_To_Authors",
+   "rules": {
+    "title": null,
+    "abstract": 1,
+    "body": 1,
+    "notes": null,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Public Administration Review",
+   "fields": [
+    "Public policy, administration, and governance"
+   ],
+   "limitKind": "hard",
+   "limitWords": 8000,
+   "limitPages": null,
+   "limitText": "8,000 words",
+   "included": "Includes abstract, notes and references; excludes tables, figures and appendices.",
+   "note": "October 2015 official instructions only; current applicability not verified.",
+   "status": "Older guidance",
+   "url": "https://onlinelibrary.wiley.com/pb-assets/assets/15406210/PAR_submission_guidelines_Oct_2015.pdf",
+   "rules": {
+    "title": null,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 0,
+    "tables": 0,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Public Administration",
+   "fields": [
+    "Public policy, administration, and governance"
+   ],
+   "limitKind": "hard",
+   "limitWords": 9000,
+   "limitPages": null,
+   "limitText": "9,000 words",
+   "included": "Detailed included/excluded components not specified in the accessible length rule.",
+   "note": "Research articles.",
+   "status": "Criteria incomplete",
+   "url": "https://onlinelibrary.wiley.com/page/journal/14679299/homepage/forauthors.html",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Governance",
+   "fields": [
+    "Public policy, administration, and governance"
+   ],
+   "limitKind": "hard",
+   "limitWords": 9000,
+   "limitPages": null,
+   "limitText": "9,000 words",
+   "included": "Inconsistent definitions: one passage excludes citations and bibliography; another appears to exclude all text, notes, references, appendices, figures and tables.",
+   "note": "The latter wording is internally implausible. Obtain clarification rather than infer the intended count.",
+   "status": "Conflicting instructions",
+   "url": "https://onlinelibrary.wiley.com/page/journal/14680491/homepage/forauthors.html",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": true
+  },
+  {
+   "name": "Journal of Public Policy",
+   "fields": [
+    "Public policy, administration, and governance"
+   ],
+   "limitKind": "hard",
+   "limitWords": 8000,
+   "limitPages": null,
+   "limitText": "8,000 words",
+   "included": "Excludes abstract, references, figures/tables text and supplementary material.",
+   "note": "Approximately 8,000 words; the entire main document must also be no longer than 45 pages.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/journal-of-public-policy/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": 0,
+    "body": 1,
+    "notes": null,
+    "captions": 0,
+    "tables": 0,
+    "refs": 0,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Policy Studies Journal",
+   "fields": [
+    "Public policy, administration, and governance"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Excludes references; further components not individually specified.",
+   "note": "Research articles; official February 2024 guidelines.",
+   "status": "Criteria incomplete",
+   "url": "https://onlinelibrary.wiley.com/pb-assets/assets/15410072/PSJ-AUTHOR-GUIDELINES-Feb-2024-1709098502563.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": 0,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of European Public Policy",
+   "fields": [
+    "Public policy, administration, and governance"
+   ],
+   "limitKind": "hard",
+   "limitWords": 8000,
+   "limitPages": null,
+   "limitText": "8,000 words",
+   "included": "Includes references, notes, tables, figures and diagrams. Each full page of tables costs 475 words of the limit.",
+   "note": "Older publisher style sheet; current applicability not verified.",
+   "status": "Older guidance",
+   "url": "https://files.taylorandfrancis.com/rjppstyle.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Policy Sciences",
+   "fields": [
+    "Public policy, administration, and governance"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "All inclusive, including main text, notes, acknowledgements and references.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://link.springer.com/journal/11077/submission-guidelines",
+   "rules": {
+    "title": 1,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 1,
+    "acks": 1,
+    "equations": 1
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Policy Analysis and Management",
+   "fields": [
+    "Public policy, administration, and governance"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not stated",
+   "included": "No article-length counting definition found in the accessible instructions.",
+   "note": "This does not establish that the journal has no limit.",
+   "status": "Not stated",
+   "url": "https://onlinelibrary.wiley.com/page/journal/15206688/homepage/forauthors.html",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Policy & Politics",
+   "fields": [
+    "Public policy, administration, and governance"
+   ],
+   "limitKind": "hard",
+   "limitWords": 8000,
+   "limitPages": null,
+   "limitText": "8,000 words",
+   "included": "Includes references; other components not specified on the accessible journal page.",
+   "note": "Research articles.",
+   "status": "Criteria incomplete",
+   "url": "https://policyandpoliticsblog.com/submit-to-journal/",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Public Management Review",
+   "fields": [
+    "Public policy, administration, and governance"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=rpxm20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Law and Courts",
+   "fields": [
+    "Law, courts, and judicial politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Detailed included/excluded components not specified on the accessible page.",
+   "note": "Exceptions possible when necessary for research integrity or qualitative description.",
+   "status": "Criteria incomplete",
+   "url": "https://www.cambridge.org/core/journals/journal-of-law-and-courts/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Law & Society Review",
+   "fields": [
+    "Law, courts, and judicial politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12500,
+   "limitPages": null,
+   "limitText": "12,500 words",
+   "included": "Excludes references, appendices and tables.",
+   "note": "Current Cambridge instructions: normal range 7,000–12,500.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/law-and-society-review/information/author-instructions/submitting-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": 0,
+    "refs": 0,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Law & Social Inquiry",
+   "fields": [
+    "Law, courts, and judicial politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 15000,
+   "limitPages": null,
+   "limitText": "15,000 words",
+   "included": "Includes footnotes/endnotes; no other explicit exclusions verified.",
+   "note": "Research articles.",
+   "status": "Criteria incomplete",
+   "url": "https://www.cambridge.org/core/journals/law-and-social-inquiry/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Empirical Legal Studies",
+   "fields": [
+    "Law, courts, and judicial politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not stated",
+   "included": "No article-length counting definition found in the accessible instructions.",
+   "note": "This does not establish that the journal has no limit.",
+   "status": "Not stated",
+   "url": "https://onlinelibrary.wiley.com/page/journal/17401461/homepage/forauthors.html",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Justice System Journal",
+   "fields": [
+    "Law, courts, and judicial politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=ujsj20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Journal of Constitutional Law",
+   "fields": [
+    "Law, courts, and judicial politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 14000,
+   "limitPages": null,
+   "limitText": "14,000 words",
+   "included": "Includes footnotes. Other component rules not explicitly stated.",
+   "note": "Normal range 10,000–14,000 words, rather than an explicitly absolute cap.",
+   "status": "Criteria incomplete",
+   "url": "https://static.primary.prod.gcms.the-infra.com/static/site/icon/document/icon-submission-guidelines.pdf?node=c9aae226432290a8c78c",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Politics & Gender",
+   "fields": [
+    "Gender, race, ethnicity, and identity"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.cambridge.org/core/journals/politics-and-gender/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Politics, Groups, and Identities",
+   "fields": [
+    "Gender, race, ethnicity, and identity"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=rpgi20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Race, Ethnicity, and Politics",
+   "fields": [
+    "Gender, race, ethnicity, and identity"
+   ],
+   "limitKind": "hard",
+   "limitWords": 11000,
+   "limitPages": null,
+   "limitText": "11,000 words",
+   "included": "Includes tables, figures, references and printed appendices; excludes web appendices.",
+   "note": "Initial web appendix has a separate 20-page maximum.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/journal-of-race-ethnicity-and-politics/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 1,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Politics and Governance",
+   "fields": [
+    "Gender, race, ethnicity, and identity"
+   ],
+   "limitKind": "hard",
+   "limitWords": 8500,
+   "limitPages": null,
+   "limitText": "8,500 words",
+   "included": "Includes title, abstract, keywords, main text, text in tables, acknowledgements and references. Excludes conflict-of-interest, funding and data-availability statements, supplements and author biographies of up to 50 words.",
+   "note": "Normal limit; overlength charges allow longer articles. Corrected from 'Politics & Governance' in the supplied list.",
+   "status": "Verified",
+   "url": "https://www.cogitatiopress.com/politicsandgovernance/pages/view/forauthors",
+   "rules": {
+    "title": 1,
+    "abstract": 1,
+    "body": 1,
+    "notes": null,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Social Politics",
+   "fields": [
+    "Gender, race, ethnicity, and identity"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Detailed included/excluded components not specified on the accessible page.",
+   "note": "Normal range 8,000–10,000 words.",
+   "status": "Criteria incomplete",
+   "url": "https://academic.oup.com/sp/pages/Manuscript_Preparation",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Ethnic and Racial Studies",
+   "fields": [
+    "Gender, race, ethnicity, and identity"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=rers20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Ethnopolitics",
+   "fields": [
+    "Gender, race, ethnicity, and identity"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.ethnopolitics.org/ethnopolitics/cfp.html",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Nationalities Papers",
+   "fields": [
+    "Gender, race, ethnicity, and identity"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not stated",
+   "included": "No article-length counting definition found in the accessible instructions.",
+   "note": "This does not establish that the journal has no limit.",
+   "status": "Not stated",
+   "url": "https://www.cambridge.org/core/journals/nationalities-papers/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Nations and Nationalism",
+   "fields": [
+    "Gender, race, ethnicity, and identity"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes endnotes and references.",
+   "note": "Normal maximum for articles.",
+   "status": "Verified",
+   "url": "https://asen.ac.uk/journals/nations-nationalism/author-guidelines/",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Mobilization",
+   "fields": [
+    "Political sociology, movements, and participation"
+   ],
+   "limitKind": "pages",
+   "limitWords": null,
+   "limitPages": 40,
+   "limitText": "40 pages",
+   "included": "Includes references; excludes figures and tables.",
+   "note": "Page limit rather than a stated word maximum.",
+   "status": "Verified",
+   "url": "https://mobilization.scholasticahq.com/for-authors",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": 0,
+    "tables": 0,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Social Movement Studies",
+   "fields": [
+    "Political sociology, movements, and participation"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=csms20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Social Forces",
+   "fields": [
+    "Political sociology, movements, and participation"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes text, endnotes and references. Tables and figures are governed by a separate limit.",
+   "note": "Maximum 10 tables/figure panels; online supplement has a separate 10-page limit.",
+   "status": "Verified",
+   "url": "https://academic.oup.com/sf/pages/author-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 0,
+    "tables": 0,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Theory and Society",
+   "fields": [
+    "Political sociology, movements, and participation"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes references; excludes tables.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://link.springer.com/journal/11186/submission-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": 0,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Environmental Politics",
+   "fields": [
+    "Environmental politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=fenp20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Global Environmental Politics",
+   "fields": [
+    "Environmental politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://direct.mit.edu/glep/pages/submission-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Environmental Policy and Governance",
+   "fields": [
+    "Environmental politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Detailed included/excluded components not specified in the accessible rule.",
+   "note": "Approximate range 7,000–10,000 words.",
+   "status": "Criteria incomplete",
+   "url": "https://onlinelibrary.wiley.com/page/journal/17569338/homepage/forauthors.html",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Climate Policy",
+   "fields": [
+    "Environmental politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=tcpo20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Political Geography",
+   "fields": [
+    "Political geography, urban, and territorial politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.sciencedirect.com/journal/political-geography/publish/guide-for-authors",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Urban Affairs Review",
+   "fields": [
+    "Political geography, urban, and territorial politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 12000,
+   "limitPages": null,
+   "limitText": "12,000 words",
+   "included": "Includes all text, notes, references, tables and figures.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://www.urbanaffairsreview.com/author-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Journal of Urban and Regional Research",
+   "fields": [
+    "Political geography, urban, and territorial politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes references; further components not individually specified.",
+   "note": "Normal maximum; official 2023 author guidelines.",
+   "status": "Criteria incomplete",
+   "url": "https://onlinelibrary.wiley.com/pb-assets/assets/14682427/IJURR%20Author%20Guidelines%202023.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Publius: The Journal of Federalism",
+   "fields": [
+    "Political geography, urban, and territorial politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes text, references, tables, figures, endnotes and printed appendices; excludes online appendices.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://academic.oup.com/publius/pages/Instructions_To_Authors",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 1,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Regional & Federal Studies",
+   "fields": [
+    "Political geography, urban, and territorial politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=frfs20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Territory, Politics, Governance",
+   "fields": [
+    "Political geography, urban, and territorial politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=rtep20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Local Government Studies",
+   "fields": [
+    "Political geography, urban, and territorial politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=flgs20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Politics and Religion",
+   "fields": [
+    "Religion and politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 9000,
+   "limitPages": null,
+   "limitText": "9,000 words",
+   "included": "Includes notes and references; excludes figures, tables and online appendices.",
+   "note": "Approximately 9,000 words for research articles.",
+   "status": "Verified",
+   "url": "https://www.cambridge.org/core/journals/politics-and-religion/information/author-instructions/preparing-your-materials",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": 0,
+    "tables": 0,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Politics, Religion & Ideology",
+   "fields": [
+    "Religion and politics"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=ftmp21",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal for the Scientific Study of Religion",
+   "fields": [
+    "Religion and politics"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Article-length rule includes main document and references, excludes appendices, supplements, abstract, tables and figures. A later word-count instruction includes tables and figure captions.",
+   "note": "Conflicting treatment of tables/figure captions; confirm the intended count.",
+   "status": "Conflicting instructions",
+   "url": "https://onlinelibrary.wiley.com/page/journal/14685906/homepage/forauthors.html",
+   "rules": {
+    "title": null,
+    "abstract": 0,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": true
+  },
+  {
+   "name": "Human Rights Quarterly",
+   "fields": [
+    "Human rights and global governance"
+   ],
+   "limitKind": "none",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "No hard cap stated",
+   "included": "Detailed included/excluded components not specified.",
+   "note": "Typical length 5,000–10,000 words, not a stated hard maximum.",
+   "status": "Criteria incomplete",
+   "url": "https://www.press.jhu.edu/journals/human-rights-quarterly",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Human Rights",
+   "fields": [
+    "Human rights and global governance"
+   ],
+   "limitKind": "hard",
+   "limitWords": 10000,
+   "limitPages": null,
+   "limitText": "10,000 words",
+   "included": "Includes notes, references and appendices.",
+   "note": "10,000 words or 30 double-spaced pages; longer articles discouraged but exceptions possible.",
+   "status": "Verified",
+   "url": "https://journal.humanrights.uconn.edu/submissions/",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": 1,
+    "captions": null,
+    "tables": null,
+    "refs": 1,
+    "appendix": 1,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Global Governance",
+   "fields": [
+    "Human rights and global governance"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://brill.com/view/journals/gg/gg-overview.xml",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "International Journal of Human Rights",
+   "fields": [
+    "Human rights and global governance"
+   ],
+   "limitKind": "unknown",
+   "limitWords": null,
+   "limitPages": null,
+   "limitText": "Not verified",
+   "included": "Not verified.",
+   "note": "Current official length and counting rules could not be verified.",
+   "status": "Not verified",
+   "url": "https://www.tandfonline.com/action/authorSubmission?show=instructions&journalCode=fjhr20",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "PS: Political Science & Politics",
+   "fields": [
+    "Political science education and the profession"
+   ],
+   "limitKind": "hard",
+   "limitWords": 4800,
+   "limitPages": null,
+   "limitText": "4,800 words",
+   "included": "Includes title, abstract, article, tables, figures, footnotes and references; excludes separately uploaded appendix/supplementary material.",
+   "note": "Original research articles; symposium contributions have a different limit.",
+   "status": "Verified",
+   "url": "https://apsanet.org/publications/journals/ps-political-science-politics/submission-guidelines/",
+   "rules": {
+    "title": 1,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 1,
+    "tables": 1,
+    "refs": 1,
+    "appendix": 0,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "Journal of Political Science Education",
+   "fields": [
+    "Political science education and the profession"
+   ],
+   "limitKind": "hard",
+   "limitWords": 7500,
+   "limitPages": null,
+   "limitText": "7,500 words",
+   "included": "Detailed included/excluded components not specified in the older instructions.",
+   "note": "Normal article length in older publisher PDF; current applicability not verified.",
+   "status": "Older guidance",
+   "url": "https://files.taylorandfrancis.com/upseauth.pdf",
+   "rules": {
+    "title": null,
+    "abstract": null,
+    "body": 1,
+    "notes": null,
+    "captions": null,
+    "tables": null,
+    "refs": null,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  },
+  {
+   "name": "European Political Science",
+   "fields": [
+    "Political science education and the profession"
+   ],
+   "limitKind": "hard",
+   "limitWords": 7000,
+   "limitPages": null,
+   "limitText": "7,000 words",
+   "included": "Includes abstract, notes and references; excludes figures and tables.",
+   "note": "Research articles.",
+   "status": "Verified",
+   "url": "https://link.springer.com/journal/41304/submission-guidelines",
+   "rules": {
+    "title": null,
+    "abstract": 1,
+    "body": 1,
+    "notes": 1,
+    "captions": 0,
+    "tables": 0,
+    "refs": 1,
+    "appendix": null,
+    "acks": null,
+    "equations": null
+   },
+   "conflicting": false
+  }
+ ]
+}

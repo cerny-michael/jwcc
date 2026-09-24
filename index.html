@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Journal Word Count Checker</title>
+<meta name="description" content="Estimate whether a manuscript fits a political science journal's word limit, with a lower bound, an upper bound and a best estimate. Runs entirely in your browser.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="page-head">
+  <div class="wrap">
+    <h1>Journal Word Count Checker</h1>
+    <p class="lede">Drop in a manuscript, pick a journal, and see whether it fits — with an explicit
+      lower bound, upper bound and best estimate, because journals disagree about what a word is.</p>
+    <p class="privacy">Your file never leaves this page. The document is parsed in your browser; nothing is uploaded, stored or transmitted.</p>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="card" aria-labelledby="step1">
+    <h2 id="step1"><span class="step">1</span> Choose a target</h2>
+
+    <div class="field">
+      <label for="journal-filter">Filter journals</label>
+      <input type="search" id="journal-filter" placeholder="e.g. comparative, APSR, peace" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label for="journal">Journal</label>
+      <select id="journal">
+        <option value="">— No journal: I will set my own limit —</option>
+      </select>
+      <p class="hint" id="journal-count"></p>
+    </div>
+
+    <div class="field">
+      <label for="custom-limit">Word limit <span class="sub">(overrides the journal's figure if you enter one)</span></label>
+      <input type="number" id="custom-limit" min="0" step="100" placeholder="e.g. 10000" inputmode="numeric">
+    </div>
+
+    <div id="journal-card" class="journal-card" hidden></div>
+  </section>
+
+  <section class="card" aria-labelledby="step2">
+    <h2 id="step2"><span class="step">2</span> Add the manuscript</h2>
+    <div id="drop" class="drop" tabindex="0" role="button" aria-describedby="drop-hint">
+      <p class="drop-main">Drag a file here, or click to choose</p>
+      <p class="hint" id="drop-hint">Word <code>.docx</code> or <code>.pdf</code>. A <code>.docx</code> gives a far more reliable
+        breakdown than a PDF, because Word marks its own footnotes, tables and captions.</p>
+      <input type="file" id="file" accept=".docx,.pdf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden>
+    </div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section id="results" hidden aria-labelledby="results-head">
+    <div class="card">
+      <h2 id="results-head"><span class="step">3</span> Result</h2>
+      <p id="verdict" class="verdict"></p>
+
+      <div class="figures">
+        <div class="figure figure-lo">
+          <div class="figure-label">Lower bound</div>
+          <div class="figure-num" id="num-lower">—</div>
+          <div class="figure-note">Only what the journal clearly counts</div>
+        </div>
+        <div class="figure figure-best">
+          <div class="figure-label">Best estimate</div>
+          <div class="figure-num" id="num-best">—</div>
+          <div class="figure-note">Journal's rule, gaps filled by the standard scope</div>
+        </div>
+        <div class="figure figure-hi">
+          <div class="figure-label">Upper bound</div>
+          <div class="figure-num" id="num-upper">—</div>
+          <div class="figure-note">Everything the journal has not clearly excluded</div>
+        </div>
+      </div>
+
+      <p class="total-line">Whole document, every component: <strong id="num-total">—</strong> words.
+        <span id="file-note" class="sub"></span></p>
+    </div>
+
+    <div class="card">
+      <h3>What is in the document</h3>
+      <p class="hint">Each row is counted separately. Change a <em>Counts?</em> value to test a reading of
+        the instructions — the three figures update immediately.</p>
+      <table class="breakdown">
+        <thead>
+          <tr><th scope="col">Component</th><th scope="col" class="num">Words</th><th scope="col">Counts?</th><th scope="col">In</th></tr>
+        </thead>
+        <tbody id="breakdown-body"></tbody>
+      </table>
+      <p class="hint"><button type="button" id="reset-rules" class="link-btn">Reset to the journal's own rule</button></p>
+    </div>
+
+    <div class="card" id="warnings-card">
+      <h3>Read these caveats</h3>
+      <ul id="warnings" class="warnings"></ul>
+    </div>
+  </section>
+
+  <section class="card method" aria-labelledby="method-head">
+    <h2 id="method-head">How the three figures are built</h2>
+    <p>Journals impose word limits but define words differently, and most instructions are
+      incomplete. This page separates the two problems: how to count a word, and what to count.</p>
+
+    <h3>Counting a word</h3>
+    <p>A word is a whitespace-delimited token containing at least one letter or digit — the convention
+      Microsoft Word and LibreOffice implement, and the one journal limits assume, since that is the
+      number authors read off their own status bar. So hyphenated compounds
+      (<em>state-building</em>) count once, comma-grouped numbers (<em>1,254</em>) count once,
+      em and en dashes separate words, and stray punctuation counts for nothing. In a
+      <code>.docx</code>, tracked deletions are dropped and tracked insertions kept, so the figure is
+      the document with all changes accepted; reviewer comments and reference-manager field codes are
+      never counted.</p>
+
+    <h3>What to count</h3>
+    <p>The document is split into ten components — front matter, abstract, main text, notes,
+      captions, table contents, references, in-document appendices, acknowledgements and display
+      equations. Each journal's published rule marks every component as counted, not counted, or
+      unaddressed. From that:</p>
+    <ul>
+      <li><strong>Lower bound</strong> — only components the journal explicitly counts. This is the
+        most favourable defensible reading of the instructions.</li>
+      <li><strong>Upper bound</strong> — every component the journal does not explicitly exclude.
+        This is what a strict editor could hold you to.</li>
+      <li><strong>Best estimate</strong> — the journal's explicit rules, with anything it leaves
+        unaddressed resolved by the <em>standard scope</em> below.</li>
+    </ul>
+    <p>When the bounds are far apart, the journal's instructions are ambiguous, not the document.</p>
+
+    <h3>The standard scope</h3>
+    <p>For a document with no journal selected, and to resolve gaps in a journal's rule, this page
+      uses the scope that is modal across the journals in the dataset: <strong>main text, footnotes
+      and endnotes, and table and figure captions count; front matter, abstract and keywords, text
+      inside tables, the reference list, in-document appendices, acknowledgements and display
+      equations do not.</strong> It is a manuscript-text convention rather than a
+      whole-file convention, and it matches how most of the journals here that do specify their
+      rules in full define the count. You can override any row in the breakdown table.</p>
+
+    <h3>Where the journal data comes from</h3>
+    <p id="source-note"></p>
+    <p id="source-caveat" class="sub"></p>
+    <p class="sub">Always check the journal's own instructions before submitting. A limit can change
+      the week after a dataset is compiled, and several of the entries here are flagged as
+      unverified, incomplete or internally contradictory.</p>
+  </section>
+</main>
+
+<footer class="page-foot">
+  <div class="wrap">
+    <p>Runs entirely client side. Built with <a href="https://stuk.github.io/jszip/">JSZip</a> and
+      <a href="https://mozilla.github.io/pdf.js/">pdf.js</a>.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  if (window.pdfjsLib) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+</script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
