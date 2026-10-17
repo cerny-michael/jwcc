@@ -11,6 +11,11 @@ journal's word limit. It reports three figures rather than one:
 When the two bounds are far apart, the journal's instructions are ambiguous,
 not the document.
 
+The page runs in three steps: add the manuscript; then either choose a journal,
+or choose your own limit and tick the parts to count, which gives a single
+figure; then read the result. A link ending `?journal=<name>` opens with that
+journal chosen, so a coauthor can be sent the same view.
+
 The page runs entirely in the browser. Documents are never uploaded: `.docx`
 files are unzipped with [JSZip](https://stuk.github.io/jszip/) and `.pdf` files
 are read with [pdf.js](https://mozilla.github.io/pdf.js/), both client side.
@@ -21,8 +26,8 @@ are read with [pdf.js](https://mozilla.github.io/pdf.js/), both client side.
 index.html            the page
 css/styles.css        styling, light and dark
 js/engine.js          parsing, word counting, component bounds — no DOM
-js/app.js             the journal picker, file intake and rendering
-data/journals.json    133 journals: limits, criteria, per-component rules
+js/app.js             file intake, the journal picker and custom rules, rendering
+data/journals.json    133 journals: limits, guidelines, criteria, per-component rules
 data/source/          the spreadsheet the JSON is generated from
 tools/build_journals.py   regenerates data/journals.json from that spreadsheet
 tools/docx_blocks.py      dumps a .docx block stream, for debugging a count
@@ -50,16 +55,20 @@ Push to GitHub and turn on Pages (Settings → Pages → deploy from branch
 bash tests/run.sh
 ```
 
-143 assertions across four suites: the word counter and section segmentation,
+241 assertions across five suites: the word counter and section segmentation,
 the PDF code path against synthetic `pdf.js` output, the journal dataset and
-the bounds arithmetic, and the page wiring against a small shimmed DOM. They
-run under the JavaScriptCore interpreter that ships with macOS — no Node, no
-npm, no browser. Set `JSC` to another interpreter elsewhere.
+the bounds arithmetic, the page wiring against a small shimmed DOM, and the
+real `.docx` reader. The first four run under the JavaScriptCore interpreter
+that ships with macOS — no Node, no npm. Set `JSC` to another interpreter
+elsewhere.
 
-The suite stubs out `JSZip`, `pdf.js` and `DOMParser`, so it covers the
-segmentation and counting logic rather than the readers themselves. Both
-readers have been run against real files in Chrome; if you change one, check it
-the same way, with a document whose count you already know.
+The fifth suite, `tests/docx_tests.html`, builds small `.docx` files with
+JSZip and runs them through the real reader in headless Chrome: heading styles
+and bold headings, page breaks, text boxes, footnotes, tracked changes, field
+codes, tables, captions and maths. It needs Chrome (set `CHROME` if it is not
+in `/Applications`) and a connection to fetch JSZip; without Chrome it is
+skipped. The PDF reader has no equivalent yet: if you change it, check it
+against a real file whose count you already know.
 
 ## How the count is defined
 
@@ -70,7 +79,8 @@ status bar. Hyphenated compounds count once, comma-grouped numbers count once,
 em and en dashes separate words, and stray punctuation counts for nothing. In a
 `.docx`, tracked deletions are dropped and tracked insertions kept, so the
 figure is the document with all changes accepted; reviewer comments and
-reference-manager field codes are never counted.
+reference-manager field codes are never counted, and a text box, which Word
+stores twice, is counted once.
 
 **What to count** is decided per component. A document is split into ten:
 front matter, abstract and keywords, main text, footnotes and endnotes,
@@ -79,11 +89,29 @@ acknowledgements, and display equations. Each journal's published rule marks
 every component as counted, not counted, or unaddressed — the third case is
 the common one, and it is what the two bounds are for.
 
-**The standard scope**, used with no journal selected and to fill gaps in a
-journal's rule, is the modal convention across the dataset: main text, notes
+**Finding the parts.** Sections are found from headings: Word heading styles
+(read from `styles.xml`, so Word in any language works), short lines set
+entirely in bold, and lines that name a section, such as "Introduction" or
+"Data and Methods". In a `.docx`, a page break the author inserted after the
+abstract also ends it, and an abstract that runs past about 450 words is
+closed regardless. The page lists every run of paragraphs and where it went,
+under "How the document was split".
+
+**The standard scope**, used before a journal is chosen and to fill gaps in a
+journal's rule, counts the text of the manuscript proper: main text, notes
 and captions count; front matter, abstract, table contents, references,
-appendices, acknowledgements and display equations do not. Every row is
-overridable in the results table.
+appendices, acknowledgements and display equations do not. This is a choice,
+not the dataset's majority view: among journals that address them, more count
+the reference list (51 to 20), table text (34 to 19) and the abstract (18 to
+15) than exclude them. Where a journal is silent on those parts they stay in
+the upper bound. Every row is overridable in the results table.
+
+**Guidelines.** Where a journal states no hard cap but names a length to aim
+for (APSR, International Security, Journal of Theoretical Politics, Human
+Rights Quarterly), or gives only a soft figure (Political Psychology, Ethics),
+the result is measured against that figure as a guideline: going over it is
+a warning, not a failure. For a page limit, a PDF's own page count is shown
+beside the words-per-page conversion.
 
 ## Caveats worth keeping in mind
 
@@ -92,8 +120,11 @@ overridable in the results table.
   from running prose, and notes are guessed at from type size.
 - Section boundaries are found from headings. An unlabelled abstract or a
   reference list with an unusual heading will be counted as main text, and the
-  page says so in its caveats.
+  page says so in its caveats. Check "How the document was split" when a
+  figure looks wrong.
 - Several entries in the dataset are flagged unverified, incomplete, outdated
   or self-contradictory. The page shows the flag and links the journal's own
   instructions. Check them before submitting — a limit can change the week
-  after a dataset is compiled.
+  after a dataset is compiled. Readers can ask for a correction through the
+  form at the foot of the page, which opens an email to the maintainer in their
+  own mail app; nothing is sent from the page itself.

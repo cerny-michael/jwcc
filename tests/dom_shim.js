@@ -49,6 +49,10 @@ var document = {
 window.document = document;
 window.addEventListener = function () {};
 
+/* The address bar: replaceState records the last URL so tests can read it. */
+window.location = { search: '', pathname: '/' };
+window.history = { last: null, replaceState: function (s, t, url) { this.last = url; } };
+
 /* fetch: hand back the journal dataset the tests inline. */
 function fetch(url) {
   if (url.indexOf('journals.json') >= 0) {
