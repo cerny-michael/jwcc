@@ -195,6 +195,23 @@ input:focus-visible, select:focus-visible, .drop:focus-visible, button:focus-vis
 .warnings li::marker { color: var(--ink-faint); }
 .warnings li { margin-bottom: 7px; }
 
+/* The method section folds shut: its heading is the toggle, with a chevron
+   that turns when it opens. */
+.method > details > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  list-style: none; cursor: pointer; border-radius: 6px;
+}
+.method > details > summary::-webkit-details-marker { display: none; }
+.method > details > summary h2 { margin: 0; }
+.method > details > summary::after {
+  content: ""; flex: none; width: 9px; height: 9px; margin: 0 6px 4px 0;
+  border-right: 2px solid var(--ink-soft); border-bottom: 2px solid var(--ink-soft);
+  transform: rotate(45deg); transition: transform .15s;
+}
+.method > details[open] > summary { margin-bottom: 16px; }
+.method > details[open] > summary::after { transform: rotate(-135deg); margin-bottom: -4px; }
+.method > details > summary:hover h2 { color: var(--accent); }
+.method > details > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .method p, .method li { max-width: 72ch; overflow-wrap: break-word; }
 .method ul { padding-left: 1.1em; }
 .method li { margin-bottom: 6px; }
