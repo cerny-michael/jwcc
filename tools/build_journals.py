@@ -7,10 +7,11 @@ Each journal gets a `rules` object mapping the ten document components to
   null = the instructions do not say (ambiguous)
 derived by hand from the spreadsheet's "What is included / excluded" prose.
 """
-import json, re, openpyxl
+import json, os, re, openpyxl
 
-SRC = '/Users/gov/Downloads/Political_Science_Journal_Word_Limits.xlsx'
-OUT = '/Users/gov/Documents/GitHub/journal-word-count/data/journals.json'
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC = os.path.join(ROOT, 'data', 'source', 'Political_Science_Journal_Word_Limits.xlsx')
+OUT = os.path.join(ROOT, 'data', 'journals.json')
 
 COMPONENTS = ['title','abstract','body','notes','captions','tables','refs','appendix','acks','equations']
 
@@ -101,6 +102,15 @@ RULES = {
  'PS: Political Science & Politics': '+title +abstract +tables +captions +notes +refs -appendix',
  'Journal of Political Science Education': '',
  'European Political Science': '+abstract +notes +refs -tables -captions',
+ # Rechecked 16 October 2026 against the publisher's or journal's own pages.
+ 'Government and Opposition': '+refs -abstract',
+ 'Politics & Gender': '+notes +tables +captions -refs',
+ 'Global Studies Quarterly': '+notes +refs +tables +captions -abstract -appendix',
+ 'Ethnopolitics': '',
+ 'Global Environmental Politics': '+notes +refs',
+ 'Comparative Political Studies': '-refs -tables -captions',
+ 'Conflict Management and Peace Science': '+refs +tables +captions',
+ 'Global Governance': '+refs',
 }
 
 # Journals whose prose is internally inconsistent -> every component left
@@ -108,6 +118,16 @@ RULES = {
 CONFLICTING = {
  'Armed Forces & Society', 'Governance', 'Journal for the Scientific Study of Religion',
  'International Relations',
+}
+
+# Journals that state no hard cap but name a length to aim for, read from the
+# spreadsheet's qualification column. The page measures against this figure as
+# a guideline, never as a limit.
+GUIDE = {
+ 'American Political Science Review': 11000,  # "generally expects fewer than 11,000"
+ 'International Security': 15000,             # "8,000-15,000 words is considered appropriate"
+ 'Journal of Theoretical Politics': 7000,     # "target length 7,000 words"
+ 'Human Rights Quarterly': 10000,             # "typical length 5,000-10,000 words"
 }
 
 def parse_rules(spec):
@@ -170,6 +190,7 @@ for r in rows[header_idx + 1:]:
         'limitWords': words,
         'limitPages': pages,
         'limitText': ltext,
+        'guideWords': GUIDE.get(name),
         'included': (r[3] or '').strip(),
         'note': (r[4] or '').strip(),
         'status': (r[5] or '').strip(),

@@ -52,11 +52,32 @@ var jop = find('The Journal of Politics');
 eq(jop.limitKind, 'pages', 'JOP uses a page limit');
 eq(jop.limitPages, 35, 'JOP page count');
 
+/* Rechecked 16 October 2026 against the journals' own instructions. */
+var glep = find('Global Environmental Politics');
+eq(glep.limitWords, 8000, 'GEP research articles: 8,000 words');
+eq(glep.rules.refs, 1, 'GEP counts references');
+var cps = find('Comparative Political Studies');
+eq(cps.limitWords, 11000, 'CPS: 11,000 words');
+eq(cps.rules.refs, 0, 'CPS leaves out references');
+eq(cps.rules.tables, 0, 'and tables');
+var gao = find('Government and Opposition');
+eq(gao.rules.abstract, 0, 'Government and Opposition leaves out the abstract');
+eq(find('Global Governance').status, 'Older guidance', 'a 2019 source is flagged as older guidance');
+
 var afs = find('Armed Forces & Society');
 eq(afs.conflicting, true, 'Armed Forces & Society flagged as self-contradictory');
 
 var hpt = find('History of Political Thought');
 eq(hpt.limitKind, 'none', 'History of Political Thought states no limit');
+eq(hpt.guideWords, null, 'and names no length to aim for, so none is invented');
+
+/* ---- guidelines: only where a journal names a length but no cap ---- */
+var badGuide = 0;
+DATA.journals.forEach(function (j) {
+  if (j.guideWords !== null && (j.limitKind !== 'none' || !(j.guideWords > 0))) badGuide++;
+});
+eq(badGuide, 0, 'guideline figures appear only on journals with no hard cap');
+eq(find('American Political Science Review').guideWords, 11000, 'APSR guideline');
 
 /* ---- bounds against a real manuscript ---- */
 var counts = {title:16, abstract:240, body:9309, notes:213, captions:52,
