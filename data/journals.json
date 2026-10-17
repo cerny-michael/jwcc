@@ -1552,8 +1552,8 @@
    "limitPages": null,
    "limitText": "10,000 words",
    "guideWords": null,
-   "included": "No detailed included/excluded component definition found.",
-   "note": "Research articles.",
+   "included": "The guidelines ask for the manuscript's word count, not exceeding 10,000 words, but do not say which parts count.",
+   "note": "Research articles; rechecked 16 October 2026. Review is double-anonymized, so the title page, which carries the word count and an author biography of up to 100 words, is a separate file. Abstract suggested at 150 words or fewer.",
    "status": "Criteria incomplete",
    "url": "https://onlinelibrary.wiley.com/page/journal/19399162/homepage/forauthors.html",
    "rules": {
