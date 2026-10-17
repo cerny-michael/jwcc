@@ -151,6 +151,78 @@ var res7 = WordCount.pdfCountsFromPages(sameSize, 1);
 eq(res7.counts.abstract, 1 + 20, 'a body-size Introduction line closes the abstract');
 eq(res7.counts.body, 1 + 30, 'and the text after it is main text');
 
+/* ---- layouts built from positioned items, with widths as pdf.js gives them ---- */
+function item(str, x, y, size, w) {
+  return { str: str, transform: [size, 0, 0, size, x, y], width: w, height: size };
+}
+function lay(no, items) { return WordCount.pdfLinesFromTextContent({ items: items }, no); }
+
+/* Two columns under a full-width title and abstract. The right column holds
+ * the references; read line by line across both columns, the References
+ * heading would land halfway down the left column and take its text. */
+var two = [item('A Two Column Article', 200, 760, 16, 220), item('Abstract', 72, 730, 13, 70)];
+[716, 702, 688, 674].forEach(function (y) { two.push(item(ten(), 72, y, 11, 460)); });
+two.push(item('Introduction', 72, 640, 13, 90));
+[624, 610, 596, 582, 568, 554, 540, 526].forEach(function (y) { two.push(item(ten(), 72, y, 11, 228)); });
+two.push(item('Conclusion', 320, 643, 13, 80));
+[627, 613, 599, 585].forEach(function (y) { two.push(item(ten(), 320, y, 11, 228)); });
+two.push(item('References', 320, 565, 13, 80));
+[549, 535].forEach(function (y) { two.push(item(ten(), 320, y, 11, 228)); });
+var res8 = WordCount.pdfCountsFromPages([lay(1, two)], 1);
+eq(res8.counts.title, 4, 'two columns: the full-width title');
+eq(res8.counts.abstract, 1 + 40, 'two columns: the full-width abstract');
+eq(res8.counts.body, 1 + 80 + 1 + 40, 'two columns: left column, then the right');
+eq(res8.counts.refs, 1 + 20, 'two columns: the references at the foot of the right column');
+
+/* A single column with a centred heading and a right-aligned date is not
+ * mistaken for two. */
+var one = [item('A Centred Heading', 250, 760, 13, 110), item('16 October 2026', 470, 745, 11, 80)];
+[720, 706, 692, 678, 664, 650, 636].forEach(function (y) { one.push(item(ten(), 72, y, 11, 470)); });
+var oneLines = lay(1, one);
+eq(oneLines.length, 9, 'single column: one line per row');
+
+/* Items set apart with no space between them are separate words; items
+ * that touch are one. */
+var gaps = lay(1, [item('state', 72, 700, 11, 30), item('building', 110, 700, 11, 45),
+                   item('cross', 72, 680, 11, 28), item('-national', 100, 680, 11, 50)]);
+eq(gaps[0].text, 'state building', 'a gap between items becomes a space');
+eq(gaps[1].text, 'cross-national', 'touching items stay one word');
+
+/* A superscript note marker sits on a line of its own; it is not a word. */
+var sup = [item('Markers', 72, 760, 16, 80), item('Introduction', 72, 730, 13, 90)];
+[700, 686, 672, 658].forEach(function (y) { sup.push(item(ten(), 72, y, 11, 470)); });
+sup.push(item('1', 300, 690, 7, 4));
+sup.push(item('1 A note at the foot of the page', 72, 100, 8, 200));
+var res9 = WordCount.pdfCountsFromPages([lay(1, sup)], 1);
+eq(res9.counts.body, 1 + 40, 'the superscript marker adds nothing to the body');
+eq(res9.counts.notes, 9, 'the note itself, with its own number, is a note');
+
+/* References set smaller than the body belong to the references. */
+var small = [item('Small Type References', 72, 760, 16, 200), item('Introduction', 72, 730, 13, 90)];
+[700, 686, 672, 658, 644].forEach(function (y) { small.push(item(ten(), 72, y, 11, 470)); });
+small.push(item('References', 72, 610, 13, 80));
+[592, 582, 572].forEach(function (y) { small.push(item(ten(), 72, y, 8.5, 400)); });
+var res10 = WordCount.pdfCountsFromPages([lay(1, small)], 1);
+eq(res10.counts.refs, 1 + 30, 'small-type references are references');
+eq(res10.counts.notes, 0, 'not notes');
+
+/* Two pages: a running head on both, and "Page n of 2" folios. */
+function runPage(no) {
+  var its = [item('Journal of Tests 12 (2026)', 200, 770, 9, 150), item('Page ' + no + ' of 2', 280, 30, 9, 50)];
+  [740, 726, 712, 698, 684].forEach(function (y) { its.push(item(ten(), 72, y, 11, 470)); });
+  return lay(no, its);
+}
+var res11 = WordCount.pdfCountsFromPages([runPage(1), runPage(2)], 2);
+var kept11 = res11.segments.map(function (s) { return s.preview; }).join(' | ');
+eq(kept11.indexOf('Journal of Tests'), -1, 'a running head on both pages of a two-page PDF is dropped');
+eq(kept11.indexOf('Page 1 of 2'), -1, 'and so is "Page 1 of 2"');
+eq(res11.counts.notes, 0, 'neither is left behind as small-type notes');
+
+/* No text at all: a scan. */
+var scanned = null;
+try { WordCount.pdfCountsFromPages([[], []], 2); } catch (e) { scanned = e.message; }
+ok(scanned && scanned.indexOf('no readable text') >= 0, 'a PDF with no text is refused as a scan');
+
 /* Structural warnings must reach the PDF reader too, not only the .docx one. */
 var warned = res6.warnings.join(' ');
 ok(warned.indexOf('No abstract was detected') >= 0, 'a PDF with no abstract says so');

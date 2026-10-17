@@ -55,30 +55,32 @@ Push to GitHub and turn on Pages (Settings → Pages → deploy from branch
 bash tests/run.sh
 ```
 
-241 assertions across five suites: the word counter and section segmentation,
+300 assertions across five suites: the word counter and section segmentation,
 the PDF code path against synthetic `pdf.js` output, the journal dataset and
 the bounds arithmetic, the page wiring against a small shimmed DOM, and the
-real `.docx` reader. The first four run under the JavaScriptCore interpreter
+real `.docx` and PDF readers. The first four run under the JavaScriptCore interpreter
 that ships with macOS — no Node, no npm. Set `JSC` to another interpreter
 elsewhere.
 
-The fifth suite, `tests/docx_tests.html`, builds small `.docx` files with
-JSZip and runs them through the real reader in headless Chrome: heading styles
-and bold headings, page breaks, text boxes, footnotes, tracked changes, field
-codes, tables, captions and maths. It needs Chrome (set `CHROME` if it is not
-in `/Applications`) and a connection to fetch JSZip; without Chrome it is
-skipped. The PDF reader has no equivalent yet: if you change it, check it
-against a real file whose count you already know.
+The fifth suite, `tests/docx_tests.html`, runs the real readers in headless
+Chrome. It builds small `.docx` files with JSZip (heading styles and bold
+headings, page breaks, text boxes, footnotes, tracked changes and moves, field
+codes, tables, captions, maths, and broken files) and reads the PDFs in
+`tests/fixtures` with pdf.js: a two-column journal layout printed by Chrome,
+a PDF with no text, and a password-protected one. It needs Chrome (set
+`CHROME` if it is not in `/Applications`) and a connection to fetch JSZip and
+pdf.js; without Chrome it is skipped.
 
 ## How the count is defined
 
 **A word** is a whitespace-delimited token containing at least one letter or
-digit — the convention Microsoft Word and LibreOffice implement, and the one
-journal limits assume, since that is the number authors read off their own
-status bar. Hyphenated compounds count once, comma-grouped numbers count once,
-em and en dashes separate words, and stray punctuation counts for nothing. In a
+digit — the convention word processors such as Microsoft Word and LibreOffice
+broadly follow, and the one journal limits assume. Hyphenated compounds count
+once, comma-grouped numbers count once, em and en dashes separate words (as
+LibreOffice treats them by default), and stray punctuation counts for nothing. In a
 `.docx`, tracked deletions are dropped and tracked insertions kept, so the
-figure is the document with all changes accepted; reviewer comments and
+figure is the document with all changes accepted (text moved with tracking on
+counts once, where it now stands); reviewer comments and
 reference-manager field codes are never counted, and a text box, which Word
 stores twice, is counted once.
 

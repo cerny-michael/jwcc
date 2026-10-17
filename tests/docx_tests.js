@@ -209,6 +209,91 @@
     });
   });
 
+  /* Text moved with tracking on: the old copy (moveFrom) does not count. */
+  test(function () {
+    var moved = words(12), before = words(30), after = words(30);
+    return docx({ body: [
+      p({ raw: run(before + ' ') + '<w:moveFrom w:id="1">' + run(moved) + '</w:moveFrom>' }),
+      p({ raw: run(after + ' ') + '<w:moveTo w:id="2">' + run(moved) + '</w:moveTo>' })
+    ] }).then(function (r) {
+      eq(r.counts.body, 30 + 30 + 12, 'moved text counted once, where it now stands');
+    });
+  });
+
+  /* Section headings in less common wordings. */
+  test(function () {
+    return docx({ body: [
+      p('A Title', { style: 'Title' }), p('Introduction', { style: 'Heading1' }), p(words(50)),
+      p('References Cited', { style: 'Heading1' }), p(words(20)),
+      p('Supplementary Materials', { style: 'Heading1' }), p(words(30)),
+      p('Online Supplement', { style: 'Heading1' }), p(words(10))
+    ] }).then(function (r) {
+      eq(r.counts.refs, 2 + 20, '"References Cited" opens the reference list');
+      eq(r.counts.appendix, 2 + 30 + 2 + 10, '"Supplementary Materials" and "Online Supplement" are appendices');
+    });
+  });
+
+  /* An abstract with no label, recognised by the keywords line after it. */
+  test(function () {
+    return docx({ body: [
+      p('Who Gets the Gavel?', { style: 'Title' }), p('Jane Q. Scholar'),
+      p(words(130)), p('Keywords: committees, chairs, seniority'),
+      p('Introduction', { style: 'Heading1' }), p(words(200))
+    ] }).then(function (r) {
+      eq(r.counts.abstract, 130 + 4, 'unlabelled abstract followed by keywords');
+      eq(r.counts.body, 1 + 200, 'and the body starts at Introduction');
+      ok(r.warnings.join(' ').indexOf('No abstract was detected') < 0, 'no missing-abstract warning');
+    });
+  });
+
+  /* Files that are not .docx files get a plain explanation. */
+  function bytes(list, pad) {
+    var b = new Uint8Array(list.length + (pad || 0));
+    b.set(list);
+    return b.buffer;
+  }
+  [[new ArrayBuffer(0), 'The file is empty'],
+   [bytes([0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1], 500), 'older Word .doc file'],
+   [bytes([0x25, 0x50, 0x44, 0x46, 0x2D, 0x31], 500), 'This is a PDF'],
+   [bytes([0x13, 0x37, 0x42, 0x00], 500), 'not a Word .docx file'],
+   [bytes([0x50, 0x4B, 0x03, 0x04], 500), 'could not be opened']
+  ].forEach(function (c) {
+    test(function () {
+      return WordCount.extractDocx(c[0]).then(function () {
+        eq('no error', c[1], 'a broken file is refused');
+      }, function (e) {
+        ok(String(e.message).indexOf(c[1]) >= 0, 'refused with "' + c[1] + '": got ' + e.message);
+      });
+    });
+  });
+
+  /* PDFs, through the real pdf.js. */
+  function pdf(name) {
+    return fetch('fixtures/' + name).then(function (res) { return res.arrayBuffer(); })
+      .then(WordCount.extractPdf);
+  }
+  test(function () {
+    /* Printed by Chrome: full-width title and abstract above two columns,
+     * with the browser's own header and URL footer on every page. */
+    return pdf('two-column.pdf').then(function (r) {
+      var want = { title: 12, abstract: 161, body: 2046, notes: 0, refs: 193 };
+      Object.keys(want).forEach(function (c) { eq(r.counts[c], want[c], 'two-column PDF: ' + c); });
+    });
+  });
+  [['no-text.pdf', 'no readable text'], ['locked.pdf', 'password-protected']].forEach(function (c) {
+    test(function () {
+      return pdf(c[0]).then(function () { eq('no error', c[1], c[0] + ' is refused'); },
+        function (e) { ok(String(e.message).indexOf(c[1]) >= 0, c[0] + ' refused with "' + c[1] + '": got ' + e.message); });
+    });
+  });
+  test(function () {
+    return WordCount.extractPdf(bytes([0x25, 0x50, 0x44, 0x46, 0x2D, 0x31, 0x2E, 0x37], 300)).then(
+      function () { eq('no error', 'could not be read', 'a damaged PDF is refused'); },
+      function (e) { ok(String(e.message).indexOf('could not be read') >= 0, 'damaged PDF refused: got ' + e.message); });
+  });
+
+  /* Results go to the page, and line by line to the server that run.sh
+   * starts, since a PDF worker needs real time to run in headless Chrome. */
   var out = document.getElementById('out');
   tests.reduce(function (chain, t, i) {
     return chain.then(t).catch(function (e) {
@@ -218,5 +303,8 @@
   }, Promise.resolve()).then(function () {
     lines.push('', pass + ' passed, ' + fail + ' failed');
     out.textContent = lines.join('\n');
-  });
+    return lines.reduce(function (chain, l) {
+      return chain.then(function () { return fetch('RESULT/' + encodeURIComponent(l || ' ')); });
+    }, Promise.resolve()).then(function () { return fetch('RESULT/DONE'); });
+  }).catch(function () {});
 })();

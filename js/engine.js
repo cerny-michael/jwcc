@@ -78,8 +78,8 @@
     abstract:  /^(abstract|summary|executive summary)\b[:.]?$/i,
     keywords:  /^(key\s?words?|jel codes?)\b/i,
     frontmisc: /^(word count|word-count|running head|running title|corresponding author|draft|working paper|prepared for|version of|please do not cite|forthcoming in|e-?mail)\b/i,
-    refs:      /^(references?|bibliography|works cited|reference list|literature cited)\b[:.]?$/i,
-    appendix:  /^(appendix|appendices|online appendix|supplementary (material|information|appendix)|supporting information|technical appendix)\b/i,
+    refs:      /^(references?( cited)?|bibliography|works cited|sources cited|reference list|literature cited)\b[:.]?$/i,
+    appendix:  /^(appendix|appendices|online appendix|technical appendix|supporting information|supplementa(ry|l) (materials?|information|appendix|appendices)|online supplement(ary)?( (materials?|information|appendix))?)\b/i,
     acks:      /^(acknowledge?ments?|funding|funding statement|conflicts? of interest|competing interests?|declarations?|disclosure statement|data availability|data and code availability|replication|author (bio|biograph|contribution)|about the authors?|ethics statement)\b/i,
     caption:   /^(table|figure|fig\.?|exhibit|map|chart|scheme|plate|appendix table|appendix figure)\s*[a-d]?\.?\s*\d*[a-z]?\s*[:.\u2014\u2013-]/i,
     notesHead: /^(notes?|endnotes?|footnotes?)\b[:.]?$/i,
@@ -116,7 +116,8 @@
     return /^[A-Z]/.test(s) && RX.bareHead.test(s);
   }
 
-  /* A block is {text, kind: 'para'|'table'|'caption', heading: bool}.
+  /* A block is {text, kind: 'para'|'table'|'caption'|'note', heading: bool};
+   * 'note' is small type in a PDF.
    * Walks blocks in document order and assigns each to a component. */
   function assignComponents(blocks) {
     var counts = {}, i;
@@ -125,6 +126,7 @@
     var section = 'front';
     var frontWords = 0, absWords = 0;
     var pageBreak = false;            // an explicit page break since the last block
+    var opening = null;               // the body's first paragraphs, while they may be an abstract
     var segments = [];
 
     for (i = 0; i < blocks.length; i++) {
@@ -189,12 +191,20 @@
         else if (newPage || b.heading || namesSection(t) || words > 400 ||
                  absWords + words > 450) section = 'body';
         else { target = 'abstract'; absWords += words; }
+      } else if (section === 'body' && opening && RX.keywords.test(t)) {
+        /* A keywords line straight after the opening paragraphs shows that
+         * they were an abstract with no label. */
+        for (var s = opening.from; s < segments.length; s++) segments[s].component = 'abstract';
+        counts.body -= opening.words;
+        counts.abstract += opening.words;
+        opening = false;
+        target = 'abstract';
       }
 
       if (target === null) {
         if (section === 'refs' || section === 'appendix' || section === 'acks') {
           target = section;
-        } else if (section === 'notesSection') {
+        } else if (section === 'notesSection' || b.kind === 'note') {
           target = 'notes';
         } else if (b.kind === 'caption' || RX.caption.test(t)) {
           /* The extractor flags captions where it can; the pattern is checked
@@ -206,6 +216,20 @@
           target = 'body';
           section = 'body';
         }
+      }
+
+      /* Up to two paragraphs that open the body, before any heading and with
+       * no abstract found, stay open to being reassigned as one. */
+      if (target === 'body' && opening !== false && !counts.abstract) {
+        if (b.heading || namesSection(t)) {
+          opening = false;
+        } else {
+          if (!opening) opening = { from: segments.length, words: 0, blocks: 0 };
+          opening.words += words;
+          if (++opening.blocks > 2 || opening.words > 450) opening = false;
+        }
+      } else if (target !== 'body' && target !== 'notes' && opening) {
+        opening = false;
       }
 
       counts[target] += words;
@@ -269,7 +293,9 @@
       var k = kids[i];
       if (k.nodeType !== 1) continue;
       var ln = localName(k);
-      if (ln === 'instrText' || ln === 'delText' || ln === 'del' ||
+      /* moveFrom holds the old copy of text moved with tracking on; the new
+       * copy, in moveTo, is the one that counts. */
+      if (ln === 'instrText' || ln === 'delText' || ln === 'del' || ln === 'moveFrom' ||
           ln === 'fldChar' || ln === 'proofErr' || ln === 'commentReference' ||
           ln === 'commentRangeStart' || ln === 'commentRangeEnd') continue;
       if (ln === 'oMath' || ln === 'oMathPara') { out.math.push(mathText(k)); continue; }
@@ -440,9 +466,29 @@
     return null;
   }
 
+  /* Says what a file is when it is not a .docx, from its first bytes. */
+  function notDocx(arrayBuffer) {
+    if (!arrayBuffer.byteLength) return 'The file is empty.';
+    var b = new Uint8Array(arrayBuffer, 0, Math.min(4, arrayBuffer.byteLength));
+    if (b[0] === 0xD0 && b[1] === 0xCF && b[2] === 0x11 && b[3] === 0xE0) {
+      return 'This is an older Word .doc file with a .docx name. Open it in Word and save it as .docx.';
+    }
+    if (b[0] === 0x25 && b[1] === 0x50 && b[2] === 0x44 && b[3] === 0x46) {
+      return 'This is a PDF with a .docx name. Rename it to end in .pdf and add it again.';
+    }
+    if (b[0] !== 0x50 || b[1] !== 0x4B) {
+      return 'This is not a Word .docx file. It may be damaged, or another kind of file renamed to .docx.';
+    }
+    return null;
+  }
+
   function extractDocx(arrayBuffer) {
     var theZip = null;
-    return global.JSZip.loadAsync(arrayBuffer).then(function (zip) {
+    var wrong = notDocx(arrayBuffer);
+    if (wrong) return Promise.reject(new Error(wrong));
+    return global.JSZip.loadAsync(arrayBuffer).then(null, function () {
+      throw new Error('This .docx could not be opened. It may be damaged or incomplete; try saving it again in Word.');
+    }).then(function (zip) {
       theZip = zip;
       var docFile = zip.file('word/document.xml');
       if (!docFile) {
@@ -513,7 +559,12 @@
   function extractPdf(arrayBuffer) {
     var pdfjs = global.pdfjsLib;
     if (!pdfjs) return Promise.reject(new Error('The PDF reader did not load. Check your connection and reload the page.'));
-    return pdfjs.getDocument({ data: arrayBuffer }).promise.then(function (pdf) {
+    return pdfjs.getDocument({ data: arrayBuffer }).promise.then(null, function (e) {
+      if (e && e.name === 'PasswordException') {
+        throw new Error('This PDF is password-protected. Save a copy without the password and add that instead.');
+      }
+      throw new Error('This PDF could not be read. It may be damaged or incomplete; try exporting it again.');
+    }).then(function (pdf) {
       var pages = [];
       var chain = Promise.resolve();
       for (var p = 1; p <= pdf.numPages; p++) {
@@ -531,7 +582,60 @@
     });
   }
 
-  /* Groups text items into lines, keeping each line's font size. */
+  /* Joins one line's text items left to right. Where two items sit apart
+   * with no space between them, a space is put back, so that words set as
+   * separate items do not run together. */
+  function joinParts(parts) {
+    var text = '', end = null, size = 0;
+    parts.forEach(function (p) {
+      if (end !== null && p.x - end > (p.size || 10) * 0.2 &&
+          !/\s$/.test(text) && !/^\s/.test(p.str)) text += ' ';
+      text += p.str;
+      end = p.w ? p.x + p.w : null;
+      if (countWords(p.str) > 0) size = Math.max(size, p.size);
+    });
+    return { text: text.replace(/\s+/g, ' ').trim(), size: size };
+  }
+
+  /* A two-column page has an upright strip near the middle of its text that
+   * few lines cross (a full-width title and abstract above the columns
+   * do), with a fair share of lines wholly on each side of it. The two columns' lines need not share baselines, so sides are
+   * counted line by line. Returns the strip's x position, or null for a
+   * single column. */
+  function findGutter(rows) {
+    var lo = Infinity, hi = -Infinity;
+    var lines = rows.map(function (r) {
+      return r.parts.filter(function (p) { return p.w > 0 && /\S/.test(p.str); });
+    }).filter(function (ps) { return ps.length; });
+    lines.forEach(function (ps) {
+      ps.forEach(function (p) { lo = Math.min(lo, p.x); hi = Math.max(hi, p.x + p.w); });
+    });
+    if (lines.length < 6 || !(hi > lo)) return null;
+    var best = null;
+    for (var x = lo + (hi - lo) * 0.35; x <= lo + (hi - lo) * 0.65; x += 2) {
+      var crossing = 0, left = 0, right = 0;
+      lines.forEach(function (ps) {
+        var l = false, r = false, cross = false;
+        ps.forEach(function (p) {
+          if (p.x < x && p.x + p.w > x) cross = true;
+          else if (p.x + p.w <= x) l = true;
+          else r = true;
+        });
+        if (cross) crossing++;
+        if (l) left++;
+        if (r) right++;
+      });
+      var side = Math.min(left, right);
+      if (!best || crossing < best.crossing || (crossing === best.crossing && side > best.side)) {
+        best = { x: x, crossing: crossing, side: side };
+      }
+    }
+    return best.crossing <= lines.length * 0.4 && best.side >= lines.length * 0.15 ? best.x : null;
+  }
+
+  /* Groups text items into lines, keeping each line's font size. On a page
+   * set in two columns, each run of lines between full-width ones is read
+   * down the left column and then down the right. */
   function buildLines(tc, pageNo) {
     var rows = {}, i;
     for (i = 0; i < tc.items.length; i++) {
@@ -539,23 +643,41 @@
       if (!it.str) continue;
       var y = Math.round(it.transform[5] * 2) / 2;
       var size = Math.abs(it.transform[3]) || it.height || 0;
-      if (!rows[y]) rows[y] = { y: y, size: 0, parts: [] };
-      rows[y].parts.push({ x: it.transform[4], str: it.str });
-      if (countWords(it.str) > 0) rows[y].size = Math.max(rows[y].size, size);
+      if (!rows[y]) rows[y] = { y: y, parts: [] };
+      rows[y].parts.push({ x: it.transform[4], w: it.width || 0, str: it.str, size: size });
     }
-    var lines = Object.keys(rows).map(function (k) { return rows[k]; });
-    lines.sort(function (a, b) { return b.y - a.y; });
-    var out = lines.map(function (r) {
-      r.parts.sort(function (a, b) { return a.x - b.x; });
-      var text = r.parts.map(function (p) { return p.str; }).join('');
-      return { text: text.replace(/\s+/g, ' ').trim(), size: r.size, y: r.y, page: pageNo };
-    }).filter(function (l) { return l.text.length > 0; });
+    var list = Object.keys(rows).map(function (k) { return rows[k]; });
+    list.sort(function (a, b) { return b.y - a.y; });
+    list.forEach(function (r) { r.parts.sort(function (a, b) { return a.x - b.x; }); });
+
+    var gutter = findGutter(list);
+    var out = [], left = [], right = [];
+    function line(parts, y) {
+      var j = joinParts(parts);
+      return { text: j.text, size: j.size, y: y, page: pageNo };
+    }
+    function flushColumns() { out = out.concat(left, right); left = []; right = []; }
+    list.forEach(function (r) {
+      if (gutter === null) { out.push(line(r.parts, r.y)); return; }
+      var L = [], R = [], spans = false;
+      r.parts.forEach(function (p) {
+        if (p.x < gutter && p.x + p.w > gutter && /\S/.test(p.str)) spans = true;
+        (p.x + p.w / 2 < gutter ? L : R).push(p);
+      });
+      if (spans) { flushColumns(); out.push(line(r.parts, r.y)); return; }
+      if (L.length) left.push(line(L, r.y));
+      if (R.length) right.push(line(R, r.y));
+    });
+    flushColumns();
+    out = out.filter(function (l) { return l.text.length > 0; });
 
     /* Flag lines in the top and bottom band of the page. Only these can be
      * running heads or folios, so only these are candidates for removal: a
      * repeated line in the middle of a page is real text. */
     if (out.length) {
-      var yMax = out[0].y, yMin = out[out.length - 1].y, range = yMax - yMin;
+      var yMax = -Infinity, yMin = Infinity;
+      out.forEach(function (l) { yMax = Math.max(yMax, l.y); yMin = Math.min(yMin, l.y); });
+      var range = yMax - yMin;
       out.forEach(function (l) {
         l.edge = range <= 0 || l.y > yMax - range * 0.07 || l.y < yMin + range * 0.07;
       });
@@ -582,23 +704,46 @@
       if (tally[k] > best) { best = tally[k]; bodySize = parseFloat(k); }
     });
 
-    /* Drop running heads and folios: short lines repeated across pages, or
-     * lines that are nothing but a number. */
-    var seen = {};
+    /* Drop running heads and folios: lines at the top or bottom edge that
+     * repeat across pages, however long (a download stamp or a browser's
+     * printed URL), or that are nothing but a page number. */
+    var FOLIO = /^(page\s+)?[ivxlcdm\d]{1,7}(\s*(\/|of)\s*\d{1,5})?$/i;
+    /* An edge line is matched by its own text and by its whole row, so a
+     * header the column gutter splits on some pages but not others still
+     * matches. Each key is counted once per page. */
+    var rowText = {}, seen = {}, onPage = {};
     all.forEach(function (l) {
-      if (l.edge && l.text.length < 90) {
-        var key = l.text.replace(/\d+/g, '#');
-        seen[key] = (seen[key] || 0) + 1;
-      }
+      if (!l.edge) return;
+      var r = l.page + '@' + l.y;
+      rowText[r] = rowText[r] ? rowText[r] + ' ' + l.text : l.text;
     });
+    function keys(l) {
+      return [l.text, rowText[l.page + '@' + l.y]].map(function (t) { return t.replace(/\d+/g, '#'); });
+    }
+    all.forEach(function (l) {
+      if (!l.edge) return;
+      keys(l).forEach(function (k) {
+        if (onPage[l.page + '|' + k]) return;
+        onPage[l.page + '|' + k] = true;
+        seen[k] = (seen[k] || 0) + 1;
+      });
+    });
+    var repeats = Math.max(2, Math.ceil(numPages * 0.5));
     var kept = all.filter(function (l) {
-      if (l.edge && /^[ivxlcdm\d]{1,7}$/i.test(l.text)) return false;
-      if (l.edge && numPages >= 3 && l.text.length < 90) {
-        var key = l.text.replace(/\d+/g, '#');
-        if (seen[key] >= Math.max(3, numPages * 0.5)) return false;
-      }
+      if (l.edge && FOLIO.test(l.text)) return false;
+      if (l.edge && numPages >= 2 &&
+          keys(l).some(function (k) { return seen[k] >= repeats; })) return false;
       return true;
     });
+
+    /* A PDF with pages but next to no text, once running heads and stamps
+     * are set aside, is a scan or a picture of the pages. */
+    var totalWords = 0;
+    kept.forEach(function (l) { totalWords += countWords(l.text); });
+    if (totalWords < numPages * 5) {
+      throw new Error('This PDF has no readable text: it looks like a scan or a picture of the pages. ' +
+        'Run text recognition (OCR) on it first, or add the .docx instead.');
+    }
 
     /* The prevailing leading, i.e. the usual distance between one line and the
      * next. A gap noticeably wider than that is a paragraph break, which is
@@ -627,6 +772,9 @@
       var gapBreak = !!prev && prev.page === l.page && leading > 0 &&
                      (prev.y - l.y) > leading * 1.45;
       var isSmall = bodySize > 0 && l.size > 0 && l.size < smallCut;
+      /* A note marker set as a superscript sits on a line of its own. Word
+       * counts it as part of the word it follows, so it adds nothing. */
+      if (isSmall && /^[\d*\u2020\u2021\u00A7\u00B6]{1,3}$/.test(t)) continue;
       var head = classifyHeading(t);
       var isCaption = RX.caption.test(t);
       var looksHeading = head !== null || namesSection(t) ||
@@ -650,16 +798,14 @@
     }
     flush();
 
-    /* Small-type blocks are treated as footnotes. */
-    var mainBlocks = [];
-    blocks.forEach(function (b) {
-      if (b.small && !b.heading) notesWords += countWords(b.text);
-      else mainBlocks.push(b);
-    });
+    /* Small type is footnotes, unless its section says otherwise: typeset
+     * articles often set the abstract, references, appendices and
+     * acknowledgements smaller than the body. */
+    blocks.forEach(function (b) { if (b.small && !b.heading) b.kind = 'note'; });
 
-    var assigned = assignComponents(mainBlocks);
+    var assigned = assignComponents(blocks);
     var counts = assigned.counts;
-    counts.notes += notesWords;
+    notesWords = counts.notes;
 
     var separable = {
       title: true, abstract: true, body: true, notes: smallSeen, captions: true,
@@ -670,15 +816,16 @@
     warnings.push('Text inside tables cannot be told apart from running prose in a PDF, so it is counted with the main text.');
     if (smallSeen) {
       warnings.push('Footnotes were identified by type size smaller than the body text (' + notesWords +
-        ' words). Endnotes set at body size are counted as main text unless a "Notes" heading precedes them, ' +
-        'and a bibliography set in smaller type than the body, as typeset journals often do, lands in this figure too.');
+        ' words). Endnotes set at body size are counted as main text unless a "Notes" heading precedes them. ' +
+        'Small type after a References, Appendix or Acknowledgements heading is counted with that section instead.');
     } else {
       warnings.push('No smaller-than-body type was found, so no notes could be separated out. Any notes are inside the main-text figure.');
     }
     structureWarnings(counts, 'pdf').forEach(function (w) { warnings.push(w); });
     warnings.push('On a typeset PDF the front matter can swallow the first line or two of the article, ' +
       'because a drop capital or a wide opening indent looks like another title line.');
-    warnings.push('Ligatures, multi-column layouts and display equations can each shift a PDF count by a per cent or two.');
+    warnings.push('Pages set in two columns are read column by column, but an unusual layout, ligatures or display ' +
+      'equations can each shift a PDF count by a per cent or two.');
 
     return {
       source: 'pdf', counts: counts, separable: separable,

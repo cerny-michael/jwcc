@@ -138,6 +138,29 @@ var boldTitle = WordCount.assignComponents([
 eq(boldTitle.counts.title, 4 + 2, 'a bold title that begins "Theory" stays front matter');
 eq(boldTitle.counts.body, 1 + 30, 'and the body starts at Introduction');
 
+/* Less common wordings of the section headings. */
+eq(WordCount.classifyHeading('References Cited'), 'refs', 'References Cited');
+eq(WordCount.classifyHeading('Supplementary Materials'), 'appendix', 'Supplementary Materials');
+eq(WordCount.classifyHeading('Supplemental Information'), 'appendix', 'Supplemental Information');
+eq(WordCount.classifyHeading('Online Supplement'), 'appendix', 'Online Supplement');
+eq(WordCount.classifyHeading('Acknowledgments'), 'acks', 'Acknowledgments, American spelling');
+
+/* An unlabelled abstract, recognised by the keywords line after it. */
+var unlab = WordCount.assignComponents([
+  blk('A Title'), blk('Jane Doe'), blk(words(120)), blk('Keywords: committees, chairs'),
+  blk('Introduction', { heading: true }), blk(words(60))
+]);
+eq(unlab.counts.abstract, 120 + 3, 'unlabelled abstract moved from the body by its keywords line');
+eq(unlab.counts.body, 1 + 60, 'and the body is what follows');
+eq(unlab.segments[2].component, 'abstract', 'the split view shows it as abstract too');
+
+/* Body text that merely mentions keywords later on is left alone. */
+var late = WordCount.assignComponents([
+  blk('A Title'), blk(words(60)), blk('Introduction', { heading: true }), blk(words(60)),
+  blk('Keywords: these appear after a heading')
+]);
+eq(late.counts.abstract, 0, 'a keywords line after a heading does not reach back');
+
 /* Section numbers are stripped; ordinary words beginning I/V/X are not. */
 eq(WordCount.classifyHeading('IV. References'), 'refs', 'roman-numbered heading');
 eq(WordCount.classifyHeading('7.2 Appendix B'), 'appendix', 'decimal-numbered heading');
