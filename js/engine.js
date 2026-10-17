@@ -27,10 +27,13 @@
     equations: 'Display equations'
   };
 
-  /* The scope used for the "best estimate": the modal convention among the
-   * journals in the dataset — main text, notes and captions count; front
-   * matter, abstract, table contents, references, appendices, acknowledgements
-   * and display maths do not. */
+  /* The scope used for the "best estimate" wherever a journal's rule is
+   * silent: the text of the manuscript proper. Main text, notes and captions
+   * count; front matter, abstract, table contents, references, appendices,
+   * acknowledgements and display maths do not. This is a choice, not the
+   * dataset's majority view: among journals that address them, more count
+   * references, table text and the abstract than exclude them. Those parts
+   * stay inside the upper bound. */
   var STANDARD_PROFILE = {
     title: 0, abstract: 0, body: 1, notes: 1, captions: 1,
     tables: 0, refs: 0, appendix: 0, acks: 0, equations: 0
@@ -62,7 +65,16 @@
 
   /* ------------------------------------------------------- section detection */
 
+  var SECTION_NAMES = '(introduction|background|motivation|literature( review)?|' +
+    'related (literature|work)|theory|theoretical framework|argument|hypothes[ie]s|' +
+    'data|methods?|methodology|research design|empirical strategy|analysis|' +
+    'results|findings|evidence|discussion|conclusions?)';
+
   var RX = {
+    /* A line that is nothing but the name of a section ("Introduction",
+     * "Data and Methods"). Recognised whatever its styling, since many
+     * manuscripts set their headings in bold body text. */
+    bareHead:  new RegExp('^' + SECTION_NAMES + '(\\s*(and|&)\\s*' + SECTION_NAMES + ')?:?$', 'i'),
     abstract:  /^(abstract|summary|executive summary)\b[:.]?$/i,
     keywords:  /^(key\s?words?|jel codes?)\b/i,
     frontmisc: /^(word count|word-count|running head|running title|corresponding author|draft|working paper|prepared for|version of|please do not cite|forthcoming in|e-?mail)\b/i,
@@ -98,6 +110,12 @@
     return null;
   }
 
+  /* A capitalised line naming a section of the article proper. */
+  function namesSection(t) {
+    var s = stripNumber(t);
+    return /^[A-Z]/.test(s) && RX.bareHead.test(s);
+  }
+
   /* A block is {text, kind: 'para'|'table'|'caption', heading: bool}.
    * Walks blocks in document order and assigns each to a component. */
   function assignComponents(blocks) {
@@ -105,15 +123,21 @@
     for (i = 0; i < COMPONENTS.length; i++) counts[COMPONENTS[i]] = 0;
 
     var section = 'front';
-    var frontWords = 0;
+    var frontWords = 0, absWords = 0;
+    var pageBreak = false;            // an explicit page break since the last block
     var segments = [];
 
     for (i = 0; i < blocks.length; i++) {
       var b = blocks[i];
+      if (b.breakBefore) pageBreak = true;
       var t = (b.text || '').trim();
-      if (!t) continue;
-      var words = countWords(t);
-      if (!words) continue;
+      var words = t ? countWords(t) : 0;
+      if (!words) {                   // an empty paragraph can still carry the break
+        if (b.breakAfter) pageBreak = true;
+        continue;
+      }
+      var newPage = pageBreak;
+      pageBreak = !!b.breakAfter;
 
       var target = null;
       var head = classifyHeading(t);
@@ -137,11 +161,15 @@
         } else if (RX.absInline.test(t)) {
           section = 'abstract';
           target = 'abstract';
+          absWords += words;
         } else if (RX.starNote.test(t)) {
           target = 'acks';
         } else if (RX.frontmisc.test(t)) {
           target = 'title';
-        } else if (b.heading && RX.bodyHead.test(stripNumber(t))) {
+        } else if ((b.heading && frontWords > 0 && RX.bodyHead.test(stripNumber(t))) ||
+                   namesSection(t)) {
+          /* A heading only closes the front matter once a title has been
+           * seen, so a bold title beginning "Theory..." stays a title. */
           section = 'body';
         } else if (words > 45 || frontWords > 120 ||
                    (words > 15 && /[.!?]["'\u201D\u2019)]?(\s|$)/.test(t))) {
@@ -153,10 +181,14 @@
           frontWords += words;
         }
       } else if (section === 'abstract') {
+        /* The abstract ends at a page break the author inserted, at a
+         * heading, at a line naming a section, or once it has run on longer
+         * than any journal lets an abstract run. */
         if (RX.starNote.test(t)) target = 'acks';
         else if (RX.keywords.test(t) || RX.frontmisc.test(t)) target = 'abstract';
-        else if (b.heading || words > 400) section = 'body';
-        else target = 'abstract';
+        else if (newPage || b.heading || namesSection(t) || words > 400 ||
+                 absWords + words > 450) section = 'body';
+        else { target = 'abstract'; absWords += words; }
       }
 
       if (target === null) {
@@ -189,6 +221,10 @@
     if (!counts.abstract) {
       w.push('No abstract was detected \u2014 the engine looks for a line reading "Abstract". ' +
         'If yours is unlabelled it has been counted as main text.');
+    } else if (counts.abstract > 300) {
+      w.push('The abstract came to ' + counts.abstract + ' words, longer than most journals allow. ' +
+        'If the article proper begins sooner than the engine judged, open ‘How the document was split’ ' +
+        'to see where it drew the line.');
     }
     if (!counts.refs) {
       w.push('No reference list was detected (the engine looks for a heading reading "References", ' +
@@ -208,6 +244,21 @@
     return node.localName || (node.nodeName || '').replace(/^.*:/, '');
   }
 
+  function childByLocal(node, name) {
+    var kids = node.childNodes;
+    for (var i = 0; i < kids.length; i++) {
+      if (kids[i].nodeType === 1 && localName(kids[i]) === name) return kids[i];
+    }
+    return null;
+  }
+
+  function attrVal(el) {
+    return el ? (el.getAttribute('w:val') || el.getAttribute('val') || '') : '';
+  }
+
+  /* A toggle such as <w:b/> is on unless its value says otherwise. */
+  function isOn(el) { return !/^(0|false|off)$/i.test(attrVal(el)); }
+
   /* Visible text of a paragraph. Skips field instructions (Zotero/Mendeley
    * citation payloads), tracked deletions and OMML maths; maths is returned
    * separately so journals excluding "mathematical notation" can drop it. */
@@ -223,7 +274,29 @@
           ln === 'commentRangeStart' || ln === 'commentRangeEnd') continue;
       if (ln === 'oMath' || ln === 'oMathPara') { out.math.push(mathText(k)); continue; }
       if (ln === 't') { out.text.push(k.textContent || ''); continue; }
-      if (ln === 'tab' || ln === 'br' || ln === 'cr') { out.text.push(' '); continue; }
+      if (ln === 'tab' || ln === 'br' || ln === 'cr') {
+        if (ln === 'br' && out.pageBreakAt === undefined &&
+            /^page$/i.test(k.getAttribute('w:type') || k.getAttribute('type') || '')) {
+          out.pageBreakAt = out.text.join('').length;
+        }
+        out.text.push(' ');
+        continue;
+      }
+      if (ln === 'AlternateContent') {
+        /* Word stores a text box twice, once for current readers and once as
+         * a fallback for old ones. Read one copy, not both. */
+        var alt = childByLocal(k, 'Choice') || childByLocal(k, 'Fallback');
+        if (alt) nodeText(alt, out);
+        continue;
+      }
+      if (ln === 'p') {
+        /* A paragraph inside a text box, or one of several in a footnote:
+         * keep it from running into its neighbours. */
+        out.text.push(' ');
+        nodeText(k, out);
+        out.text.push(' ');
+        continue;
+      }
       nodeText(k, out);
     }
     return out;
@@ -238,22 +311,89 @@
   }
 
   function pStyle(p) {
-    var kids = p.childNodes, i, ppr = null;
-    for (i = 0; i < kids.length; i++) {
-      if (kids[i].nodeType === 1 && localName(kids[i]) === 'pPr') { ppr = kids[i]; break; }
+    var ppr = childByLocal(p, 'pPr');
+    return ppr ? attrVal(childByLocal(ppr, 'pStyle')) : '';
+  }
+
+  /* Paragraph and character styles from word/styles.xml: which are headings
+   * (an outline level, or a built-in heading name, which Word stores in
+   * English whatever the interface language) and which are bold, following
+   * each style's basedOn chain. */
+  function readStyles(xml) {
+    var raw = {}, out = {}, none = { heading: false, bold: false };
+    if (!xml) return out;
+    var all = parseXml(xml).getElementsByTagName('*'), i;
+    for (i = 0; i < all.length; i++) {
+      if (localName(all[i]) !== 'style') continue;
+      var s = all[i];
+      var ppr = childByLocal(s, 'pPr'), rpr = childByLocal(s, 'rPr');
+      var lvl = ppr ? childByLocal(ppr, 'outlineLvl') : null;
+      var b = rpr ? childByLocal(rpr, 'b') : null;
+      raw[s.getAttribute('w:styleId') || s.getAttribute('styleId') || ''] = {
+        name: attrVal(childByLocal(s, 'name')),
+        basedOn: attrVal(childByLocal(s, 'basedOn')),
+        level: lvl ? parseInt(attrVal(lvl), 10) : null,
+        bold: b ? isOn(b) : null
+      };
     }
-    if (!ppr) return '';
-    var st = ppr.getElementsByTagName('*');
-    for (i = 0; i < st.length; i++) {
-      if (localName(st[i]) === 'pStyle') {
-        return st[i].getAttribute('w:val') || st[i].getAttribute('val') || '';
+    function resolve(id, depth) {
+      if (out[id]) return out[id];
+      var r = raw[id];
+      if (!r || depth > 20) return none;
+      var parent = r.basedOn ? resolve(r.basedOn, depth + 1) : none;
+      out[id] = {
+        heading: r.level !== null ? r.level < 9
+               : (/^(heading [1-9]|title|subtitle)$/i.test(r.name) || parent.heading),
+        bold: r.bold !== null ? r.bold : parent.bold
+      };
+      return out[id];
+    }
+    Object.keys(raw).forEach(function (id) { resolve(id, 0); });
+    return out;
+  }
+
+  /* True when every run of visible text in the paragraph is bold. */
+  function allBold(p, paraBold, styles) {
+    var all = p.getElementsByTagName('*'), any = false, i, j;
+    for (i = 0; i < all.length; i++) {
+      var r = all[i];
+      if (localName(r) !== 'r') continue;
+      var txt = '';
+      for (j = 0; j < r.childNodes.length; j++) {
+        var c = r.childNodes[j];
+        if (c.nodeType === 1 && localName(c) === 't') txt += c.textContent || '';
       }
+      if (!/\S/.test(txt)) continue;
+      any = true;
+      var bold = paraBold, rpr = childByLocal(r, 'rPr');
+      if (rpr) {
+        var b = childByLocal(rpr, 'b'), rs = styles[attrVal(childByLocal(rpr, 'rStyle'))];
+        if (b) bold = isOn(b);
+        else if (rs && rs.bold) bold = true;
+      }
+      if (!bold) return false;
     }
-    return '';
+    return any;
+  }
+
+  /* A heading is a paragraph in a heading style, one given an outline level
+   * directly, or (outside tables) a short line set entirely in bold, which is
+   * how many manuscripts mark their headings. */
+  function isHeadingPara(p, text, style, styles, inTable) {
+    var st = styles[style];
+    if (/^heading[1-9]?$/i.test(style.replace(/[\s-]/g, '')) ||
+        /^(title|subtitle)$/i.test(style) || (st && st.heading)) return true;
+    var ppr = childByLocal(p, 'pPr');
+    var lvl = ppr ? childByLocal(ppr, 'outlineLvl') : null;
+    if (lvl && parseInt(attrVal(lvl), 10) < 9) return true;
+    if (inTable) return false;
+    var n = countWords(text);
+    if (n < 1 || n > 15 || /[.,;:]["'”’)]?$/.test(text.trim())) return false;
+    return allBold(p, !!(st && st.bold), styles);
   }
 
   /* Flattens w:sdt wrappers and collects paragraphs and tables in order. */
-  function collectBlocks(container, blocks, inTable) {
+  function collectBlocks(container, blocks, inTable, styles) {
     var kids = container.childNodes, i;
     for (i = 0; i < kids.length; i++) {
       var k = kids[i];
@@ -263,16 +403,29 @@
         var txt = nodeText(k);
         var style = pStyle(k);
         var text = txt.text.join('');
-        var isHeading = /^heading[1-9]?$/i.test(style.replace(/[\s-]/g, '')) ||
-                        /^(title|subtitle)$/i.test(style);
         var kind = inTable ? 'table' : 'para';
         if (!inTable && (/caption/i.test(style) || RX.caption.test(text.trim()))) kind = 'caption';
-        blocks.push({ text: text, kind: kind, heading: isHeading, math: txt.math.join(' ') });
+
+        /* Page breaks the author inserted: a manual break, "page break
+         * before", or a section break that starts a new page. Breaks Word
+         * merely rendered are ignored; they move with the layout. */
+        var ppr = childByLocal(k, 'pPr');
+        var pbb = ppr ? childByLocal(ppr, 'pageBreakBefore') : null;
+        var sect = ppr ? childByLocal(ppr, 'sectPr') : null;
+        var breakBefore = !!(pbb && isOn(pbb)), breakAfter = false;
+        if (txt.pageBreakAt !== undefined) {
+          if (/\S/.test(text.slice(0, txt.pageBreakAt))) breakAfter = true;
+          else breakBefore = true;
+        }
+        if (sect && attrVal(childByLocal(sect, 'type')) !== 'continuous') breakAfter = true;
+
+        blocks.push({ text: text, kind: kind, heading: isHeadingPara(k, text, style, styles, inTable),
+                      math: txt.math.join(' '), breakBefore: breakBefore, breakAfter: breakAfter });
       } else if (ln === 'tbl') {
-        collectBlocks(k, blocks, true);
+        collectBlocks(k, blocks, true, styles);
       } else if (ln === 'sdt' || ln === 'sdtContent' || ln === 'tr' || ln === 'tc' ||
                  ln === 'customXml' || ln === 'smartTag' || ln === 'ins') {
-        collectBlocks(k, blocks, inTable);
+        collectBlocks(k, blocks, inTable, styles);
       }
     }
   }
@@ -296,7 +449,7 @@
         throw new Error('This does not look like a Word .docx file (no word/document.xml inside). If it is an older .doc file, save it as .docx first.');
       }
       var jobs = [docFile.async('string')];
-      ['word/footnotes.xml', 'word/endnotes.xml'].forEach(function (p) {
+      ['word/footnotes.xml', 'word/endnotes.xml', 'word/styles.xml'].forEach(function (p) {
         var f = zip.file(p);
         jobs.push(f ? f.async('string') : Promise.resolve(null));
       });
@@ -308,7 +461,7 @@
       if (!body) throw new Error('Could not read the document body.');
 
       var blocks = [];
-      collectBlocks(body, blocks, false);
+      collectBlocks(body, blocks, false, readStyles(res[3]));
 
       var assigned = assignComponents(blocks);
       var counts = assigned.counts;
@@ -476,7 +629,7 @@
       var isSmall = bodySize > 0 && l.size > 0 && l.size < smallCut;
       var head = classifyHeading(t);
       var isCaption = RX.caption.test(t);
-      var looksHeading = head !== null ||
+      var looksHeading = head !== null || namesSection(t) ||
         (t.length < 70 && !/[.;,]$/.test(t) && bodySize > 0 && l.size > bodySize * 1.04);
 
       if (head !== null || isCaption || looksHeading) {

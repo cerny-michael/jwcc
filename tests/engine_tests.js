@@ -89,6 +89,55 @@ eq(seg.counts.appendix, 4 + 11, 'the appendix heading and its text');
 eq(seg.counts.acks, 10 + 1 + 5, 'the author note and the acknowledgements section');
 eq(seg.counts.notes, 0, 'no notes in this stream');
 
+/* ---- headings set in plain bold text: the abstract must still end ---- */
+var uid = 0;
+function words(n) {                   /* n distinct words, ending a sentence */
+  var w = [];
+  for (var i = 0; i < n; i++) w.push('w' + (++uid));
+  return w.join(' ') + '.';
+}
+var plain = WordCount.assignComponents([
+  blk('Why Disputes Escalate'), blk('Jane Doe'),
+  blk('Abstract'), blk(words(30)),
+  blk('Introduction'), blk(words(40)), blk(words(40)),
+  blk('2. Data and Methods'), blk(words(40)),
+  blk('References'), blk(words(10))
+]);
+eq(plain.counts.abstract, 1 + 30, 'an unstyled "Introduction" line closes the abstract');
+eq(plain.counts.body, 1 + 40 + 40 + 4 + 40, 'and everything after it is main text');
+
+var capped = WordCount.assignComponents([
+  blk('A Title'), blk('Abstract'), blk(words(200)), blk(words(200)),
+  blk(words(100)), blk(words(100))
+]);
+eq(capped.counts.abstract, 1 + 400, 'an abstract with no heading after it stops near 450 words');
+eq(capped.counts.body, 200, 'the rest is main text');
+
+var lower = WordCount.assignComponents([
+  blk('A Title'), blk('Abstract'), blk(words(20)), blk('results'), blk(words(20))
+]);
+eq(lower.counts.abstract, 1 + 20 + 1 + 20, 'a lower-case word alone is not a section heading');
+
+var paged = WordCount.assignComponents([
+  blk('A Title'), blk('Abstract'), blk(words(30)),
+  { text: words(40), kind: 'para', heading: false, breakBefore: true }, blk(words(40))
+]);
+eq(paged.counts.abstract, 1 + 30, 'a page break after the abstract ends it');
+eq(paged.counts.body, 80, 'and the next page is main text');
+
+var pagedEmpty = WordCount.assignComponents([
+  blk('A Title'), blk('Abstract'), blk(words(30)),
+  { text: '', kind: 'para', heading: false, breakAfter: true }, blk(words(40))
+]);
+eq(pagedEmpty.counts.body, 40, 'a break carried by an empty paragraph still counts');
+
+var boldTitle = WordCount.assignComponents([
+  blk('Theory of Yes Men', { heading: true }), blk('A. Author'),
+  blk('Introduction', { heading: true }), blk(words(30))
+]);
+eq(boldTitle.counts.title, 4 + 2, 'a bold title that begins "Theory" stays front matter');
+eq(boldTitle.counts.body, 1 + 30, 'and the body starts at Introduction');
+
 /* Section numbers are stripped; ordinary words beginning I/V/X are not. */
 eq(WordCount.classifyHeading('IV. References'), 'refs', 'roman-numbered heading');
 eq(WordCount.classifyHeading('7.2 Appendix B'), 'appendix', 'decimal-numbered heading');

@@ -138,6 +138,19 @@ var res6 = WordCount.pdfCountsFromPages(flow, 1);
 eq(res6.segments.length, 2, 'a heading and one merged paragraph');
 eq(res6.counts.body, 1 + 20, 'the paragraph was not split by the gap rule');
 
+/* A heading at body size, with no extra space around it, still ends the
+ * abstract: it is recognised by what it says. */
+var sameSize = [page(1, [
+  ['A Title', HEAD],
+  ['Abstract', HEAD],
+  [ten(), BODY], [ten(), BODY],
+  ['Introduction', BODY],
+  [ten(), BODY], [ten(), BODY], [ten(), BODY]
+])];
+var res7 = WordCount.pdfCountsFromPages(sameSize, 1);
+eq(res7.counts.abstract, 1 + 20, 'a body-size Introduction line closes the abstract');
+eq(res7.counts.body, 1 + 30, 'and the text after it is main text');
+
 /* Structural warnings must reach the PDF reader too, not only the .docx one. */
 var warned = res6.warnings.join(' ');
 ok(warned.indexOf('No abstract was detected') >= 0, 'a PDF with no abstract says so');
